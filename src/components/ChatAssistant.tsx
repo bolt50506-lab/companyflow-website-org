@@ -71,8 +71,8 @@ export function ChatAssistant() {
 
 
   return (
-    <div className="fixed right-5 bottom-24 z-[85] flex flex-col items-end gap-3">
-      {open && <section className="flex h-[min(560px,70vh)] w-[min(370px,calc(100vw-2.5rem))] flex-col overflow-hidden rounded-3xl border border-line bg-bg-surface shadow-[0_24px_80px_rgba(0,0,0,.5)]" aria-label="CompanyFlow chat assistant">
+    <div className="chat-widget fixed right-5 bottom-24 z-[85] flex flex-col items-end gap-3">
+      {open && <section className="chat-panel flex h-[min(560px,70vh)] w-[min(370px,calc(100vw-2.5rem))] flex-col overflow-hidden rounded-3xl border border-line bg-bg-surface shadow-[0_24px_80px_rgba(0,0,0,.5)]" aria-label="CompanyFlow chat assistant">
         <header className="flex items-center gap-3 border-b border-line p-4">
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-burgundy/20 text-burgundy-light"><Bot className="h-5 w-5" /></div>
           <div className="min-w-0 flex-1"><h2 className="font-semibold">CompanyFlow assistant</h2><p className="text-xs text-ink-muted">{actionMode !== 'chat' ? (actionMode === 'lead' ? 'Project enquiry' : 'Book a consultation') : (mode === 'ai' ? 'AI assistant' : 'CompanyFlow support')} · CompanyFlow</p></div>
@@ -115,8 +115,8 @@ export function ChatAssistant() {
         <p className="px-4 pb-3 text-[10px] text-ink-dim">Avoid sharing sensitive information. Enquiries go to companyflow0@gmail.com.</p>
       </section>}
       <div className="flex items-center gap-3">
-        {!open && <span className="rounded-full border border-burgundy-light/30 bg-bg-surface px-4 py-2 text-sm font-medium text-ink shadow-[0_8px_30px_rgba(0,0,0,.28)] animate-[fadeIn_500ms_ease-out]">Hi, wanna chat?</span>}
-        <button onClick={() => setOpen(value => !value)} aria-label={open ? 'Close chat assistant' : 'Open chat assistant'} className="flex h-14 w-14 items-center justify-center rounded-full border border-burgundy-light/50 bg-burgundy text-white shadow-[0_8px_30px_rgba(0,0,0,.35)] transition-transform duration-300 hover:scale-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-burgundy-light">
+        {!open && <span className="chat-greeting rounded-full border border-burgundy-light/30 bg-bg-surface px-4 py-2 text-sm font-medium text-ink shadow-[0_8px_30px_rgba(0,0,0,.28)] animate-[fadeIn_500ms_ease-out]">Hi, wanna chat?</span>}
+        <button onClick={() => setOpen(value => !value)} aria-label={open ? 'Close chat assistant' : 'Open chat assistant'} className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-burgundy-light/50 bg-burgundy text-white shadow-[0_8px_30px_rgba(0,0,0,.35)] transition-transform duration-300 hover:scale-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-burgundy-light">
           {open ? <X className="h-6 w-6" /> : <MessageCircle className="h-6 w-6" />}
         </button>
       </div>

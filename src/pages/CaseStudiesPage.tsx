@@ -30,7 +30,7 @@ function CaseStudiesGrid() {
       
       {/* Filter bar */}
       <section className="px-[5vw] py-8 border-t border-line sticky top-16 z-30 bg-bg/90">
-        <div className="flex flex-wrap gap-2">
+        <div className="case-study-filters flex flex-wrap gap-2">
           {categories.map(cat => (
             <button
               key={cat}

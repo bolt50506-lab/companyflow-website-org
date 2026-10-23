@@ -631,3 +631,23 @@ button, a { -webkit-tap-highlight-color: transparent; }
   }
 }
 
+@media (max-width: 767px) {
+  .case-study-filters {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    padding-bottom: .35rem;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .case-study-filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .case-study-filters > button {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+}
+

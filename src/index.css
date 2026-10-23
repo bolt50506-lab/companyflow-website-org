@@ -203,3 +203,78 @@ html.light .amb { opacity: .55; }
 .bs-in .bs-bar { animation: bs-bar 1s cubic-bezier(.16,1,.3,1) forwards, bs-breathe 4s ease-in-out 1.2s infinite; animation-delay: var(--d, 0s), calc(1.2s + var(--d, 0s)); }
 .bs-dash { stroke-dasharray: 4 6; animation: bs-dash 1s linear infinite; }
 .bs-node { animation: bs-node 2.6s ease-in-out infinite; }
+
+
+/* ───────── Responsive layout pass: tablet + mobile ───────── */
+/* Keep the layout constrained to the device viewport; desktop styling is unchanged. */
+html, body, #root { width: 100%; max-width: 100%; }
+body { overflow-x: clip; }
+img, video, canvas, svg { max-width: 100%; }
+input, textarea, select, button { font: inherit; }
+button, a { -webkit-tap-highlight-color: transparent; }
+
+@media (max-width: 1023px) {
+  main, section, footer, header, nav, form, article, aside { min-width: 0; }
+  h1, h2, h3, p { overflow-wrap: anywhere; }
+  .amb-a { width: 72vw; height: 72vw; right: -20vw; }
+  .amb-b { width: 64vw; height: 64vw; left: -24vw; }
+  .amb-c { width: 48vw; height: 48vw; left: 28vw; }
+}
+
+@media (max-width: 767px) {
+  html { scroll-padding-top: 72px; }
+  section.py-24 { padding-top: 3.75rem; padding-bottom: 3.75rem; }
+  section.py-20 { padding-top: 3rem; padding-bottom: 3rem; }
+  section.py-32 { padding-top: 4.5rem; padding-bottom: 4.5rem; }
+
+  /* Preserve the cinematic hero while allowing content to stack on phones. */
+  main > .page-enter > .grain > section.min-h-screen {
+    min-height: 100svh;
+    min-height: 100dvh;
+    padding-top: 7.5rem;
+    padding-bottom: 3rem;
+  }
+  section[class*="min-h-[70vh]"] {
+    min-height: 58svh;
+    padding-top: 7.5rem;
+    padding-bottom: 3rem;
+  }
+  .hero-in { max-width: 100%; }
+  .hero-in.flex.gap-3 {
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 100%;
+  }
+  .hero-in.flex.gap-3 > a,
+  .hero-in.flex.gap-3 > button { justify-content: center; }
+
+  .grid, .flex, .inline-flex { min-width: 0; }
+  .grid > *, .flex > * { min-width: 0; }
+  .input, input, textarea, select { max-width: 100%; min-width: 0; }
+  form .grid[class*="md:grid-cols-2"] { grid-template-columns: minmax(0, 1fr); }
+  footer form.flex.gap-2 { width: 100%; }
+  footer form.flex.gap-2 input { width: 0; }
+
+  /* Keep the project carousel touch-friendly and inside the viewport. */
+  .cursor-grab, [class*="cursor-grabbing"] { touch-action: pan-y; }
+  .grain::after { position: absolute; }
+  .amb-a, .amb-b, .amb-c { opacity: .7; }
+  .amb-a { width: 88vw; height: 88vw; right: -34vw; }
+  .amb-b { width: 78vw; height: 78vw; left: -35vw; }
+  .amb-c { width: 58vw; height: 58vw; left: 24vw; }
+  .cur-ring { display: none; }
+}
+
+@media (max-width: 480px) {
+  body { font-size: 15px; }
+  h1 { letter-spacing: -0.045em; }
+  .font-mono.text-xs.uppercase.tracking-widest { letter-spacing: .12em; }
+  .hero-in.flex.gap-3 > a,
+  .hero-in.flex.gap-3 > button {
+    flex: 1 1 100%;
+    width: 100%;
+  }
+  [class*="px-[5vw]"] { padding-left: 1.1rem; padding-right: 1.1rem; }
+  .mobile-menu, [role="dialog"] { max-width: 100vw; }
+  .rounded-3xl { border-radius: 1.25rem; }
+}

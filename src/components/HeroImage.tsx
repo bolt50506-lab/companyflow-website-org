@@ -10,16 +10,14 @@ export function HeroImage() {
     >
       <style>{`
         @keyframes hi-pop {
-          0%   { opacity: 0; transform: translate3d(0,50px,0) scale(.6); }
-          55%  { opacity: 1; transform: translate3d(0,-8px,0) scale(1.05); }
-          78%  { transform: translate3d(0,3px,0) scale(.985); }
-          100% { opacity: 1; transform: translate3d(0,0,0) scale(1); }
+          0%   { opacity: 0; transform: translate3d(0,24px,0) scale(.97); filter: blur(6px); }
+          100% { opacity: 1; transform: translate3d(0,0,0) scale(1); filter: blur(0); }
         }
-        @keyframes hi-float { 0%,100% { transform: translate3d(0,0,0); } 50% { transform: translate3d(0,-12px,0); } }
+        @keyframes hi-float { 0%,100% { transform: translate3d(0,0,0); } 50% { transform: translate3d(0,-7px,0); } }
         .hi-pop { opacity: 0; transform-origin: 50% 65%; will-change: transform, opacity; }
-        html[data-ready='true'] .hi-pop { animation: hi-pop 1.1s cubic-bezier(.22,1,.36,1) .6s both; }
+        html[data-ready='true'] .hi-pop { animation: hi-pop 1.25s cubic-bezier(.16,1,.3,1) .35s both; }
         .hi-float { will-change: transform; }
-        html[data-ready='true'] .hi-float { animation: hi-float 7s ease-in-out 1.9s infinite; }
+        html[data-ready='true'] .hi-float { animation: hi-float 9s ease-in-out 1.6s infinite; }
       `}</style>
       <div className="hi-pop w-full h-full">
         <div className="hi-float w-full h-full">

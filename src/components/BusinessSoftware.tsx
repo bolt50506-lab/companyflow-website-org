@@ -76,12 +76,12 @@ export function BusinessSoftware() {
       <SectionLabel>Business software</SectionLabel>
       <SplitHeading text="Your business. In sync." className="text-[clamp(2rem,5.5vw,5rem)] font-bold tracking-tight mb-6" />
       <p className="max-w-xl text-ink-muted text-lg leading-relaxed mb-14">Less juggling between tools. More clarity across your business. We build connected systems that make everyday work feel effortless.</p>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="bs-scroll-stack">
         {cards.map((c, i) => (
           <Reveal key={c.title} delay={i * 80}>
-            <a href={c.href} data-cursor={c.cursor} className="bs-product-card group block h-full border border-line rounded-3xl overflow-hidden bg-bg-surface transition-[transform,border-color] duration-500">
-              <div className="bs-product-visual">{c.mock === 'crm' ? <CrmMock /> : c.mock === 'erp' ? <ErpMock /> : <CustomMock />}</div>
-              <div className="p-7"><div className="flex items-center justify-between"><span className="bs-card-number">{c.number} / SOLUTION</span><ArrowUpRight className="w-5 h-5 text-burgundy-light transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1" /></div><h3 className="text-2xl font-semibold tracking-tight mt-3">{c.title}</h3><p className="text-sm text-ink-muted leading-relaxed mt-3">{c.text}</p><span className="bs-explore">Explore solution <ArrowUpRight /></span></div>
+            <a href={c.href} data-cursor={c.cursor} className={`bs-product-card bs-scroll-card group block border border-line rounded-3xl overflow-hidden bg-bg-surface transition-[transform,border-color] duration-500 ${i % 2 ? "bs-reverse" : ""}`} style={{ "--scene-index": i } as React.CSSProperties}>
+              <div className="bs-product-visual bs-scroll-visual">{c.mock === 'crm' ? <CrmMock /> : c.mock === 'erp' ? <ErpMock /> : <CustomMock />}</div>
+              <div className="bs-product-copy p-7"><div className="flex items-center justify-between"><span className="bs-card-number">{c.number} / SOLUTION</span><ArrowUpRight className="w-5 h-5 text-burgundy-light transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1" /></div><h3 className="text-2xl font-semibold tracking-tight mt-3">{c.title}</h3><p className="text-sm text-ink-muted leading-relaxed mt-3">{c.text}</p><span className="bs-explore">Explore solution <ArrowUpRight /></span></div>
             </a>
           </Reveal>
         ))}

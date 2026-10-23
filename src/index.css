@@ -602,3 +602,32 @@ button, a { -webkit-tap-highlight-color: transparent; }
   }
 }
 
+@media (max-width: 767px) {
+  .chat-widget input,
+  .chat-widget textarea,
+  .chat-widget select {
+    min-width: 0;
+    max-width: 100%;
+    font-size: 16px;
+  }
+
+  .chat-widget button,
+  .chat-widget a {
+    touch-action: manipulation;
+  }
+
+  /* Keep the full-screen mobile menu clear of notches and home indicators. */
+  header + .fixed.inset-0.z-\[70\] {
+    padding-top: max(1rem, env(safe-area-inset-top));
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+
+  /* Avoid animation clipping and overly tight card interiors on narrow screens. */
+  main .rounded-3xl .p-8,
+  main .rounded-3xl .p-7 {
+    padding: 1.25rem;
+  }
+}
+

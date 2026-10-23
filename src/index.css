@@ -481,3 +481,95 @@ button, a { -webkit-tap-highlight-color: transparent; }
   }
 }
 
+/* Mobile floating controls: respect safe areas and keep the two actions separate. */
+@media (max-width: 767px) {
+  .whatsapp-widget {
+    left: max(.875rem, env(safe-area-inset-left));
+    bottom: calc(.875rem + env(safe-area-inset-bottom));
+    width: 3.25rem;
+    height: 3.25rem;
+    z-index: 84;
+  }
+
+  .chat-widget {
+    right: max(.875rem, env(safe-area-inset-right));
+    bottom: calc(4.75rem + env(safe-area-inset-bottom));
+    gap: .5rem;
+    z-index: 85;
+  }
+
+  .chat-widget > .chat-panel {
+    width: min(23rem, calc(100vw - 1.75rem));
+    max-width: calc(100vw - 1.75rem);
+    height: min(36rem, calc(100dvh - 8rem - env(safe-area-inset-bottom)));
+    max-height: calc(100dvh - 8rem - env(safe-area-inset-bottom));
+    border-radius: 1.25rem;
+  }
+
+  .chat-widget > .chat-panel > header {
+    padding: .75rem;
+    gap: .5rem;
+  }
+
+  .chat-widget > .chat-panel > header h2 {
+    font-size: .95rem;
+    line-height: 1.25;
+  }
+
+  .chat-widget > .chat-panel > header p {
+    font-size: .68rem;
+    line-height: 1.3;
+  }
+
+  .chat-widget .chat-greeting {
+    display: none;
+  }
+
+  .chat-widget > div:last-child > button {
+    width: 3.25rem;
+    height: 3.25rem;
+    flex: 0 0 3.25rem;
+  }
+
+  .back-to-top {
+    right: max(.875rem, env(safe-area-inset-right));
+    bottom: calc(.875rem + env(safe-area-inset-bottom));
+    width: 2.875rem;
+    height: 2.875rem;
+  }
+
+  /* Make small controls comfortable to tap without enlarging the desktop UI. */
+  main button,
+  main a,
+  footer button,
+  footer a {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  main .project-card,
+  main a.group {
+    -webkit-transform: translateZ(0);
+  }
+
+  /* Prevent a fixed chat panel from forcing the document wider than the screen. */
+  .chat-widget,
+  .chat-widget * {
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 380px) {
+  .chat-widget {
+    right: max(.625rem, env(safe-area-inset-right));
+  }
+
+  .chat-widget > .chat-panel {
+    width: calc(100vw - 1.25rem);
+    max-width: calc(100vw - 1.25rem);
+  }
+
+  .chat-widget > .chat-panel > header {
+    padding: .625rem;
+  }
+}
+

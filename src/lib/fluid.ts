@@ -290,15 +290,15 @@ void main () {
       prs = mkD(SW, SH, g.NEAREST);
     };
 
-    /* ---- burgundy + camel ink ---- */
+    /* ---- luxury burgundy ink on near-black ---- */
     const gen = (): RGB => {
       const j = Math.random();
-      if (Math.random() < 0.28) {
-        // camel / amber
-        return { r: 0.74, g: 0.44 + j * 0.1, b: 0.14 + j * 0.06 };
+      // Deep wine is the dominant tone; occasional crimson/rose gives the
+      // fluid enough highlight to read against the near-black background.
+      if (Math.random() < 0.72) {
+        return { r: 0.28 + j * 0.24, g: 0.004 + j * 0.018, b: 0.025 + j * 0.055 };
       }
-      // burgundy -> crimson -> rose
-      return { r: 0.6 + j * 0.32, g: 0.01 + j * 0.05, b: 0.05 + j * 0.12 };
+      return { r: 0.62 + j * 0.3, g: 0.008 + j * 0.035, b: 0.045 + j * 0.085 };
     };
     const scale = (c: RGB, k: number): RGB => ({ r: c.r * k, g: c.g * k, b: c.b * k });
 

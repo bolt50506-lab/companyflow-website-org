@@ -187,8 +187,8 @@ html[data-ready='true'] .hero-in { animation: hero-in 1.1s cubic-bezier(.16,1,.3
 @keyframes amb-c { 0%,100% { transform: translate3d(0,0,0) scale(.95); } 50% { transform: translate3d(5vw,8vh,0) scale(1.1); } }
 .amb { position: absolute; border-radius: 50%; will-change: transform; }
 .amb-a { right: -10vw; top: -12vh; width: 55vw; height: 55vw; background: radial-gradient(circle, rgba(124,31,46,.55) 0%, transparent 65%); animation: amb-a 26s ease-in-out infinite; }
-.amb-b { left: -12vw; bottom: -16vh; width: 50vw; height: 50vw; background: radial-gradient(circle, rgba(200,137,59,.32) 0%, transparent 65%); animation: amb-b 34s ease-in-out infinite; }
-.amb-c { left: 30vw; top: 35vh; width: 34vw; height: 34vw; background: radial-gradient(circle, rgba(168,56,74,.28) 0%, transparent 65%); animation: amb-c 30s ease-in-out infinite; }
+.amb-b { left: -12vw; bottom: -16vh; width: 50vw; height: 50vw; background: radial-gradient(circle, rgba(86,8,27,.38) 0%, transparent 65%); animation: amb-b 34s ease-in-out infinite; }
+.amb-c { left: 30vw; top: 35vh; width: 34vw; height: 34vw; background: radial-gradient(circle, rgba(112,12,38,.34) 0%, transparent 65%); animation: amb-c 30s ease-in-out infinite; }
 html.light .amb { opacity: .55; }
 
 /* ───────── Business-software mockups ───────── */

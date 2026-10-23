@@ -17,6 +17,7 @@ import { ResourcesPage } from '@/pages/ResourcesPage';
 import { CaseStudiesPage } from '@/pages/CaseStudiesPage';
 import { ContactPage } from '@/pages/ContactPage';
 import { updateSeo } from '@/lib/seo';
+import '@/styles/scroll-driven.css';
 
 function Routes() {
   const { route } = useHashRoute();

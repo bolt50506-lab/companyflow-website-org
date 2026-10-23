@@ -573,3 +573,32 @@ button, a { -webkit-tap-highlight-color: transparent; }
   }
 }
 
+@media (max-width: 767px) {
+  /* The footer newsletter input shares a row with its submit button. */
+  footer form input[type="email"] {
+    width: 0;
+    min-width: 0;
+    flex: 1 1 0%;
+  }
+
+  /* Category filters and form chips remain comfortable finger targets. */
+  main section.sticky button,
+  main form button[type="button"] {
+    min-height: 2.625rem;
+  }
+
+  /* Keep images and media from imposing their intrinsic desktop dimensions. */
+  main img,
+  main video,
+  main iframe,
+  main svg {
+    max-width: 100%;
+  }
+
+  /* Preserve readable line lengths in the assistant and newsletter content. */
+  .chat-panel p,
+  footer form + p {
+    overflow-wrap: anywhere;
+  }
+}
+

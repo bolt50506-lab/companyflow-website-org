@@ -1,0 +1,51 @@
+CompanyFlow v18 — Global routing fix
+- Converted Header and Footer navigation links from hash-based hrefs to clean pathname URLs.
+- Fixed legacy #/route handling so it works even when the hash is attached to a nested URL.
+- Updated delegated navigation to normalize legacy app-route hashes anywhere on the site while leaving ordinary #section anchors alone.
+- No live deployment performed.
+
+CompanyFlow route, text animation, and SEO update
+
+Scope: focused corrections only. Existing projects, case studies, team, testimonials, statistics, office imagery, sections, contact forms, chat styling, WhatsApp widget, and fluid background remain in place. No production deployment was performed.
+
+Changes:
+- Fixed the requested word-by-word text reveal on the homepage intro and company mission. Each word now animates with a soft rise/fade and blur, while spacing is handled explicitly so words do not run together or wrap awkwardly.
+- Respects prefers-reduced-motion and includes a fallback for browsers without IntersectionObserver.
+- Replaced internal hash URLs with clean pathname URLs such as /company, /solutions/custom-software, /case-studies/labstack, and /resources/blog/design-systems-that-actually-get-used.
+- Updated the router to read pathnames, support browser back/forward, preserve smooth client-side navigation, and redirect legacy #/ links to the equivalent clean path.
+- Added Netlify fallback routing for clean URLs while allowing generated static route files and assets to be served.
+- Updated canonical URLs, Open Graph URLs, page titles and descriptions, Twitter card metadata, and route-specific WebPage structured data.
+- Added Service, Article, or CreativeWork mainEntity schema where appropriate.
+- Expanded sitemap.xml to 52 clean URLs covering all top-level pages, all 12 service pages, all 6 blog articles, and all 26 case-study detail pages.
+- Added a dependency-free build step that generates a static HTML entry for every sitemap URL, including route-specific title, description, canonical, social metadata, JSON-LD, and a no-JavaScript fallback. The React app still renders the actual interactive page on load.
+
+Checks completed:
+- TypeScript/TSX syntax transpilation: 35 source files, zero syntax diagnostics.
+- Sitemap: valid XML, 52 unique clean URLs, all service/blog/case-study slugs covered, no hash URLs.
+- Netlify configuration parsed successfully.
+- Organization JSON-LD parsed successfully.
+- Static route HTML generator smoke test passed; generated route metadata and canonical were verified on a sample solution page.
+
+Not verified:
+- Full dependency installation, Vite production build, ESLint, and live browser testing could not be completed because npm ci timed out while accessing the npm registry. Run npm ci and npm run build in an environment with registry access before deploying.
+- Search ranking is not guaranteed by code changes alone. Rankings depend on useful content, competition, backlinks, site performance, Search Console indexing, and time.
+
+
+Assistant update (un-deployed):
+- Switched the server-side chat function from OpenAI to Groq using GROQ_API_KEY and GROQ_MODEL, defaulting to openai/gpt-oss-20b.
+- Added a CompanyFlow-only system prompt grounded in the website's published service descriptions and public contact/process facts.
+- Added project enquiry capture in the existing chat widget and Gmail API delivery to companyflow0@gmail.com.
+- Added Google Calendar availability checks and 30-minute weekday appointment creation with attendee invitations.
+- Added COMPANYFLOW-ASSISTANT-SETUP.md and .env.example with placeholders only. Real API/OAuth credentials have not been supplied, configured, or tested.
+- Full npm build and live API tests remain pending because dependency installation was unavailable in this environment.
+
+Code cleanup in v16:
+- Removed the unused legacy premium-agency HTML file from public assets.
+- Removed an unused Google Calendar response field from the chat component type.
+- Kept active chat fallback, rate limiting, validation, route generation, and booking logic intact.
+
+Final launch audit fixes (v19):
+- Fixed package manifest/lockfile mismatch: `lenis` was declared in package.json but absent from package-lock.json, preventing reproducible `npm ci` installs.
+- Removed the unavailable third-party Lenis runtime and retained browser-native smooth scrolling, including reduced-motion support. Page entrance, reveal, and other visual animations remain unchanged.
+- Confirmed 52 unique sitemap URLs with no hash-based sitemap links and generated static route HTML shells for all 52 entries in a controlled smoke test.
+- Full dependency installation/build and live integrations could not be verified in this environment because npm registry packages were unavailable. See FINAL-AUDIT.md before production launch.

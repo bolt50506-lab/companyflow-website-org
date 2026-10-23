@@ -278,3 +278,72 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .mobile-menu, [role="dialog"] { max-width: 100vw; }
   .rounded-3xl { border-radius: 1.25rem; }
 }
+
+
+/* ───────── Mobile usability fixes (all routes) ───────── */
+@media (max-width: 767px) {
+  /* Prevent children with intrinsic/fixed widths from forcing a desktop canvas. */
+  #root, #root > *, main, main > *, main > * > * {
+    max-width: 100%;
+    min-width: 0;
+  }
+  main section {
+    scroll-margin-top: 76px;
+  }
+  main img {
+    height: auto;
+    max-width: 100%;
+  }
+  main section img.object-cover {
+    height: 100%;
+  }
+  /* Make every major content column collapse before it becomes cramped. */
+  main .grid[class*="md:grid-cols-"],
+  main .grid[class*="lg:grid-cols-"] {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  /* Keep compact metric grids readable on phones. */
+  main .grid.grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  /* The case-study results grid needs two columns, not four tiny ones. */
+  main .grid.grid-cols-2[class*="md:grid-cols-4"] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  /* Let headings and long labels wrap instead of pushing the page sideways. */
+  main h1, main h2, main h3, main p, footer p, footer a {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+  /* Give touch targets a little breathing room without changing the desktop design. */
+  button, a[role="button"] {
+    touch-action: manipulation;
+  }
+  /* Floating assistant panel must fit even on 320px-wide screens. */
+  [data-chat-panel], .chat-panel {
+    width: min(22rem, calc(100vw - 1.5rem));
+    max-width: calc(100vw - 1.5rem);
+  }
+}
+
+@media (max-width: 480px) {
+  /* Avoid oversized horizontal padding on narrow phones. */
+  main section[class*="px-"] {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  main section[class*="pt-32"] {
+    padding-top: 6.5rem;
+  }
+  main section[class*="py-"] {
+    scroll-margin-top: 72px;
+  }
+  /* Stack any button groups that don't fit comfortably on a narrow screen. */
+  main .flex.items-end.justify-between.gap-8 {
+    align-items: stretch;
+  }
+  /* Prevent the floating widgets from covering the whole mobile viewport. */
+  .fixed.z-\[70\] {
+    padding: 1rem;
+  }
+}

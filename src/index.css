@@ -927,3 +927,32 @@ html.light .premium-background { background:radial-gradient(ellipse at 76% 20%,r
 .bs-activity {display:flex;align-items:center;gap:7px;padding:8px;border:1px solid rgba(255,255,255,.07);border-radius:6px;background:rgba(255,255,255,.025)}.bs-activity-dot {width:5px;height:5px;border-radius:50%;background:#81c99a}.bs-activity>span:nth-child(2) {display:flex;flex-direction:column;gap:3px;flex:1}.bs-activity b {font-size:7px}.bs-activity small {font-size:6px;color:#968b94}.bs-activity>svg {width:10px;height:10px;color:#8bc99a}
 .bs-card-number {font:600 9px ui-monospace,monospace;letter-spacing:.1em;color:#b67a89; }.bs-explore {display:inline-flex;align-items:center;gap:5px;margin-top:20px;font-size:12px;color:#e1a0ae}.bs-explore svg {width:13px;height:13px;transition:transform .3s}.bs-product-card:hover .bs-explore svg {transform:translate(2px,-2px)}
 @media(max-width:767px){.bs-product-visual{height:245px}.bs-section{padding-top:4rem;padding-bottom:4rem}.premium-orb-wrap{pointer-events:none}}
+
+
+/* ───────── Scroll-linked software showcase ───────── */
+.bs-scroll-stack{display:flex;flex-direction:column;gap:clamp(2rem,7vw,6rem);margin-top:2rem}
+.bs-scroll-card{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(260px,.8fr);align-items:stretch;min-height:clamp(390px,44vw,620px);background:linear-gradient(135deg,rgba(255,255,255,.025),rgba(25,7,14,.65));isolation:isolate}
+.bs-scroll-card.bs-reverse{grid-template-columns:minmax(260px,.8fr) minmax(0,1.35fr)}
+.bs-scroll-card.bs-reverse .bs-scroll-visual{order:2}
+.bs-scroll-card.bs-reverse .bs-product-copy{order:1}
+.bs-scroll-visual{height:auto;min-height:390px;display:flex;align-items:center;justify-content:center;padding:clamp(1rem,4vw,3.5rem);perspective:1400px;overflow:hidden;background:radial-gradient(ellipse at 50% 50%,rgba(126,24,55,.2),transparent 65%),linear-gradient(135deg,rgba(255,255,255,.018),transparent)}
+.bs-scroll-visual:before{content:"";position:absolute;inset:12%;border:1px solid rgba(194,78,110,.13);transform:rotateX(58deg) rotateZ(-22deg) scale(1.15);background:repeating-linear-gradient(0deg,transparent 0 35px,rgba(190,65,99,.07) 36px),repeating-linear-gradient(90deg,transparent 0 35px,rgba(190,65,99,.07) 36px);mask-image:linear-gradient(transparent,#000 20%,#000 80%,transparent);pointer-events:none}
+.bs-scroll-visual .bs-window{position:relative;z-index:1;width:100%;max-width:650px;box-shadow:0 35px 100px rgba(0,0,0,.6),0 0 65px rgba(139,25,59,.16);transform:rotateY(-8deg) rotateX(3deg) translateY(24px) scale(.93);transform-origin:center;will-change:transform,opacity}
+.bs-reverse .bs-scroll-visual .bs-window{transform:rotateY(8deg) rotateX(3deg) translateY(24px) scale(.93)}
+.bs-scroll-visual .bs-window-bar{font-size:10px}
+.bs-product-copy{display:flex;flex-direction:column;justify-content:center;padding:clamp(1.5rem,4vw,4rem);border-left:1px solid rgba(255,255,255,.06)}
+.bs-reverse .bs-product-copy{border-left:0;border-right:1px solid rgba(255,255,255,.06)}
+.bs-product-copy h3{font-size:clamp(1.8rem,3.2vw,3.25rem);line-height:1.05}
+.bs-product-copy p{font-size:clamp(.95rem,1.2vw,1.1rem);max-width:32rem}
+.bs-card-number{font-size:10px}
+.bs-scroll-card{view-timeline-name:--software-card;view-timeline-axis:block}
+@supports (animation-timeline:view()) {
+  .bs-scroll-visual .bs-window{animation:bs-dashboard-scroll linear both;animation-timeline:--software-card;animation-range:entry 0% cover 48%}
+  .bs-scroll-visual:before{animation:bs-grid-scroll linear both;animation-timeline:--software-card;animation-range:entry 0% cover 70%}
+  .bs-scroll-card .bs-product-copy{animation:bs-copy-scroll linear both;animation-timeline:--software-card;animation-range:entry 0% cover 42%}
+}
+@keyframes bs-dashboard-scroll{0%{opacity:.45;transform:rotateY(-14deg) rotateX(8deg) translateY(80px) scale(.82)}45%{opacity:1;transform:rotateY(0) rotateX(0) translateY(0) scale(1)}100%{opacity:1;transform:rotateY(0) rotateX(0) translateY(-10px) scale(1)}}
+@keyframes bs-grid-scroll{0%{opacity:.15;transform:rotateX(70deg) rotateZ(-28deg) scale(.8)}100%{opacity:1;transform:rotateX(58deg) rotateZ(-22deg) scale(1.15)}}
+@keyframes bs-copy-scroll{0%{opacity:.25;transform:translateY(45px)}60%,100%{opacity:1;transform:translateY(0)}}
+@media(max-width:767px){.bs-scroll-card,.bs-scroll-card.bs-reverse{grid-template-columns:1fr;min-height:0}.bs-scroll-visual,.bs-scroll-card.bs-reverse .bs-scroll-visual{order:1;min-height:280px;height:280px;padding:1rem}.bs-product-copy,.bs-scroll-card.bs-reverse .bs-product-copy{order:2;border:0;border-top:1px solid rgba(255,255,255,.06);padding:1.5rem}.bs-scroll-visual .bs-window,.bs-reverse .bs-scroll-visual .bs-window{transform:none}.bs-scroll-stack{gap:2rem}}
+@media(prefers-reduced-motion:reduce){.bs-scroll-visual .bs-window,.bs-scroll-visual:before,.bs-scroll-card .bs-product-copy{animation:none!important;transform:none!important;opacity:1!important}}

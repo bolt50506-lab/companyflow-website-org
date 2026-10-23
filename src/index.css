@@ -764,3 +764,98 @@ button, a { -webkit-tap-highlight-color: transparent; }
     font-size: .84rem;
   }
 }
+
+
+/* ───────── Premium ambient 3D background: restrained, slow, and low-contrast ───────── */
+@keyframes premium-orb-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-9deg); }
+  50% { transform: translate3d(0, -18px, 0) rotate(4deg); }
+}
+@keyframes premium-orb-ring {
+  from { transform: rotateX(68deg) rotateZ(0deg); }
+  to { transform: rotateX(68deg) rotateZ(360deg); }
+}
+.premium-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 78% 17%, rgba(92, 20, 36, .18), transparent 42%),
+    radial-gradient(ellipse at 12% 78%, rgba(75, 18, 30, .10), transparent 46%);
+}
+.premium-orb-wrap {
+  position: absolute;
+  top: 8%;
+  right: 7%;
+  width: clamp(220px, 31vw, 460px);
+  aspect-ratio: 1;
+  opacity: .30;
+  animation: premium-orb-drift 18s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+.premium-orb {
+  position: absolute;
+  inset: 12%;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 28% 23%, rgba(255, 223, 218, .78), transparent 10%),
+    radial-gradient(circle at 32% 25%, rgba(194, 67, 89, .88), transparent 29%),
+    radial-gradient(circle at 70% 76%, rgba(27, 5, 12, .96), transparent 48%),
+    radial-gradient(circle at 42% 38%, #792136 0%, #39101d 48%, #0c080a 76%);
+  box-shadow:
+    inset -24px -28px 48px rgba(0, 0, 0, .65),
+    inset 10px 12px 28px rgba(255, 207, 207, .13),
+    0 28px 90px rgba(95, 20, 39, .15);
+  filter: saturate(.8);
+}
+.premium-orb::before {
+  content: '';
+  position: absolute;
+  inset: 7%;
+  border: 1px solid rgba(255, 226, 224, .24);
+  border-radius: 50%;
+  transform: rotate(-24deg) scaleX(.78);
+}
+.premium-orb-ring {
+  position: absolute;
+  inset: 1%;
+  border: 1px solid rgba(198, 126, 139, .35);
+  border-radius: 50%;
+  transform: rotateX(68deg);
+  box-shadow: 0 0 24px rgba(124, 31, 46, .10);
+  animation: premium-orb-ring 48s linear infinite;
+}
+html.light .premium-background {
+  background:
+    radial-gradient(ellipse at 78% 17%, rgba(146, 38, 56, .09), transparent 42%),
+    radial-gradient(ellipse at 12% 78%, rgba(146, 38, 56, .045), transparent 46%);
+}
+html.light .premium-orb-wrap { opacity: .12; }
+@media (max-width: 1023px) {
+  .premium-orb-wrap {
+    top: 10%;
+    right: -6%;
+    width: clamp(190px, 42vw, 340px);
+    opacity: .19;
+  }
+}
+@media (max-width: 767px) {
+  .premium-orb-wrap {
+    top: 7%;
+    right: -16%;
+    width: 220px;
+    opacity: .12;
+  }
+  /* Revert the hero artwork to the top of the mobile hero; keep the CTA sizing. */
+  .hero-image {
+    order: 0;
+    margin: 0 auto 1.25rem;
+    width: min(56vw, 13.5rem);
+    height: min(25svh, 12rem);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .premium-orb-wrap, .premium-orb-ring { animation: none !important; }
+}

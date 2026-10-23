@@ -347,3 +347,137 @@ button, a { -webkit-tap-highlight-color: transparent; }
     padding: 1rem;
   }
 }
+
+/* ───────── Final mobile layout corrections ───────── */
+/* Keep the desktop composition intact while making each section reflow cleanly on phones. */
+@media (max-width: 767px) {
+  #root,
+  #root > *,
+  main,
+  main > .page-enter,
+  main > .page-enter > .grain {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: clip;
+  }
+
+  main section {
+    box-sizing: border-box;
+    max-width: 100%;
+  }
+
+  /* Keep normal words intact; wrap long URLs/labels only when necessary. */
+  main h1,
+  main h2,
+  main h3,
+  main p,
+  footer p,
+  footer a {
+    word-break: normal;
+    overflow-wrap: break-word;
+  }
+
+  /* The homepage hero needs a readable heading and a real stacked action row. */
+  main > .page-enter > .grain > section.min-h-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    gap: 0;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  main .hero-in.flex.gap-3 {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: .75rem;
+  }
+
+  main .hero-in.flex.gap-3 > a,
+  main .hero-in.flex.gap-3 > button {
+    width: 100%;
+    min-height: 48px;
+    justify-content: center;
+  }
+
+  /* Cards and content columns should never retain desktop minimum widths. */
+  main .grid[class*="md:grid-cols-"],
+  main .grid[class*="lg:grid-cols-"] {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  main .grid.grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  main .grid > *,
+  main .flex > *,
+  footer .grid > * {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  main section[class*="px-"] {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Keep animated portfolio cards and their controls within the phone width. */
+  .cursor-grab,
+  [class*="cursor-grabbing"] {
+    max-width: 100%;
+    touch-action: pan-y;
+  }
+
+  /* Forms use one readable column and inputs remain tappable without zooming. */
+  main form .grid[class*="md:grid-cols-2"] {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  main input,
+  main textarea,
+  main select,
+  footer input {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    font-size: 16px;
+  }
+
+  /* Avoid desktop hover/cursor effects on touch screens. */
+  .cur-ring,
+  .cursor-none,
+  .cursor-none * {
+    cursor: auto !important;
+  }
+
+  /* Floating tools must stay narrow enough to leave the page usable. */
+  [data-chat-panel],
+  .chat-panel {
+    width: min(22rem, calc(100vw - 1.25rem));
+    max-width: calc(100vw - 1.25rem);
+  }
+}
+
+@media (max-width: 380px) {
+  main h1 {
+    font-size: clamp(2.35rem, 12vw, 2.8rem);
+    line-height: .98;
+  }
+
+  main .grid.grid-cols-2 {
+    gap: .75rem;
+  }
+
+  main .grid.grid-cols-2 > * {
+    min-width: 0;
+  }
+
+  .font-mono.text-xs.uppercase.tracking-widest {
+    letter-spacing: .08em;
+  }
+}
+

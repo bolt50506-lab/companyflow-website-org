@@ -3,7 +3,7 @@ import { Reveal } from '@/components/Reveal';
 import { PageHero } from '@/components/PageHero';
 import { MagneticButton } from '@/components/MagneticButton';
 import { ArrowRight, Check } from 'lucide-react';
-import { openEmailFallback, submitNetlifyForm } from '@/lib/forms';
+
 
 const budgets = ['< $25k', '$25k – $50k', '$50k – $100k', '$100k+'];
 const projectTypes = ['Web App', 'Mobile App', 'Custom Software', 'ERP', 'CRM', 'Shopify / E-commerce', 'UI/UX Design', 'Cloud / DevOps', 'AI / Automation', 'Data & BI', 'Not sure yet'];
@@ -15,11 +15,17 @@ export function ContactPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus('sending');
-    const values = { name: form.name, email: form.email, company: form.company, budget: form.budget, type: form.type, message: form.message, 'bot-field': '' };
-    const accepted = await submitNetlifyForm('contact-form', values);
-    if (accepted) { setStatus('success'); return; }
-    openEmailFallback('CompanyFlow project enquiry', `Name: ${form.name}\nEmail: ${form.email}\nCompany: ${form.company || 'Not provided'}\nProject type: ${form.type || 'Not selected'}\nBudget: ${form.budget || 'Not specified'}\n\nProject details:\n${form.message}`);
-    setStatus('fallback');
+    try {
+      const response = await fetch('/.netlify/functions/lead', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: form.name, email: form.email, company: form.company, budget: form.budget, type: form.type, message: form.message }),
+      });
+      const result = await response.json() as { success?: boolean; error?: string };
+      if (!response.ok || !result.success) throw new Error(result.error || 'Could not send your enquiry.');
+      setStatus('success');
+    } catch {
+      setStatus('fallback');
+    }
   };
 
   const update = (key: string, value: string) => setForm(prev => ({ ...prev, [key]: value }));
@@ -96,7 +102,7 @@ export function ContactPage() {
                   <textarea required value={form.message} onChange={e => update('message', e.target.value)} rows={5} className="input resize-none" placeholder="What are you building? What problem does it solve?" data-cursor="Type" />
                 </Field>
 
-                {status === 'fallback' && <p role="status" className="text-sm text-ink-muted">Your email app should open with the enquiry prepared. Please send that email to complete your request. If no email app opens, write to companyflow0@gmail.com.</p>}
+                {status === 'fallback' && <p role="status" className="text-sm text-ink-muted">We couldn't send your enquiry just now. Please email companyflow0@gmail.com directly.</p>}
                 <MagneticButton type="submit" className="px-7 py-4 text-base w-full justify-center" data-cursor="Send">
                   {status === 'sending' ? 'Sending…' : 'Send message'} <ArrowRight className="w-4 h-4" />
                 </MagneticButton>

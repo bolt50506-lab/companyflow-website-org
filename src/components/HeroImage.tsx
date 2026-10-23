@@ -1,11 +1,11 @@
 /**
  * Hero visual (right side): pops in as the loader lifts, then floats gently.
- * Hidden below lg so it never collides with the headline on small screens.
+ * Reflows above the headline on phones and stays on the right on desktop.
  */
 export function HeroImage() {
   return (
     <div
-      className="hidden lg:block absolute right-[3vw] top-[13%] h-[min(66vh,44vw,620px)] pointer-events-none z-[1]"
+      className="hero-image absolute right-[3vw] top-[13%] h-[min(66vh,44vw,620px)] pointer-events-none z-[1]"
       style={{ aspectRatio: '902 / 936' }}
     >
       <style>{`

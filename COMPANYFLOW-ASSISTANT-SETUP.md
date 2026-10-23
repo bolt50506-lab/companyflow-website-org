@@ -33,3 +33,8 @@ Keep credentials in Netlify environment variables. Do not commit real credential
 ## 4. Privacy
 
 The chat sends the last ten chat messages to Groq. Enquiry details are forwarded to Web3Forms and delivered to its configured destination. Booking information is handled by Cal.com under its own service and privacy terms. Update the site's privacy notice as needed before collecting customer data.
+
+
+## Production deployment
+
+The production deployment uses the `WEB3FORMS_ACCESS_KEY` environment variable in Netlify. After changing this value, redeploy the site so the serverless enquiry function can read it.

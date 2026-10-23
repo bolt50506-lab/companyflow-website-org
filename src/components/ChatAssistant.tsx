@@ -1,14 +1,8 @@
 import { FormEvent, useEffect, useRef, useState } from 'react';
-import { Bot, MessageCircle, Send, X, LoaderCircle, CalendarDays, ClipboardList, ArrowLeft, CheckCircle2 } from 'lucide-react';
+import { Bot, MessageCircle, Send, X, LoaderCircle, CalendarDays, ClipboardList, ArrowLeft } from 'lucide-react';
 
 type Message = { role: 'user' | 'assistant'; content: string };
 type ChatMode = 'chat' | 'lead' | 'booking';
-type Slot = { start: string; end: string; label: string };
-function todayInLondon() {
-  const parts = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/London', year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(new Date());
-  const values = Object.fromEntries(parts.map(part => [part.type, part.value]));
-  return `${values.year}-${values.month}-${values.day}`;
-}
 const START: Message[] = [{ role: 'assistant', content: "Hi, I'm the CompanyFlow assistant. Ask me about our software, websites, ecommerce, ERP/CRM, or how to start a project." }];
 
 function quickAnswer(input: string): string {
@@ -32,11 +26,6 @@ export function ChatAssistant() {
   const [formBusy, setFormBusy] = useState(false);
   const [formStatus, setFormStatus] = useState('');
   const [lead, setLead] = useState({ name: '', email: '', company: '', service: 'Custom Software Development', budget: '', details: '' });
-  const [booking, setBooking] = useState({ name: '', email: '', company: '', topic: 'Discuss a project' });
-  const [bookingDate, setBookingDate] = useState('');
-  const [slots, setSlots] = useState<Slot[]>([]);
-  const [selectedSlot, setSelectedSlot] = useState('');
-  const [slotsBusy, setSlotsBusy] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => { scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' }); }, [messages, open, busy]);
@@ -80,34 +69,6 @@ export function ChatAssistant() {
     finally { setFormBusy(false); }
   }
 
-  async function loadSlots(date: string) {
-    setBookingDate(date); setSelectedSlot(''); setSlots([]); setFormStatus('');
-    if (!date) return;
-    setSlotsBusy(true);
-    try {
-      const response = await fetch('/.netlify/functions/calendar', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'availability', date }) });
-      const result = await response.json() as { slots?: Slot[]; error?: string };
-      if (!response.ok) throw new Error(result.error || 'Could not check availability.');
-      setSlots(result.slots || []);
-      if (!result.slots?.length) setFormStatus('No available 30-minute appointments were found for this date. Please try another weekday.');
-    } catch (error) { setFormStatus(error instanceof Error ? error.message : 'Could not check calendar availability.'); }
-    finally { setSlotsBusy(false); }
-  }
-
-  async function submitBooking(event: FormEvent) {
-    event.preventDefault();
-    if (!selectedSlot) { setFormStatus('Please select an available time.'); return; }
-    setFormBusy(true); setFormStatus('');
-    try {
-      const response = await fetch('/.netlify/functions/calendar', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'book', ...booking, start: selectedSlot }) });
-      const result = await response.json() as { success?: boolean; message?: string; error?: string };
-      if (!response.ok || !result.success) throw new Error(result.error || 'Could not book this appointment.');
-      setFormStatus(result.message || 'Your appointment has been booked.');
-      setMessages(current => [...current, { role: 'assistant', content: 'Your consultation has been booked in Google Calendar. Please check your email for the invitation.' }]);
-      setSelectedSlot(''); setSlots([]); setBookingDate('');
-    } catch (error) { setFormStatus(error instanceof Error ? error.message : 'Could not book your appointment. Please contact companyflow0@gmail.com.'); }
-    finally { setFormBusy(false); }
-  }
 
   return (
     <div className="fixed right-5 bottom-24 z-[85] flex flex-col items-end gap-3">
@@ -145,20 +106,12 @@ export function ChatAssistant() {
           <textarea required minLength={10} maxLength={5000} value={lead.details} onChange={e => setLead(v => ({ ...v, details: e.target.value }))} rows={4} placeholder="What would you like to build?" className="w-full resize-none rounded-xl border border-line bg-bg px-3 py-2.5 text-sm text-ink" />
           {formStatus && <p role="status" className="text-xs text-ink-muted">{formStatus}</p>}
           <button disabled={formBusy} className="flex w-full items-center justify-center gap-2 rounded-full bg-burgundy px-4 py-3 text-sm text-white disabled:opacity-50">{formBusy ? <LoaderCircle className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}{formBusy ? 'Sending…' : 'Send project enquiry'}</button>
-        </form> : <form onSubmit={submitBooking} className="flex-1 space-y-3 overflow-y-auto p-4">
-          <p className="text-sm text-ink-muted">Choose a weekday and an available 30-minute slot. Times are shown in UK local time ({'Europe/London'}).</p>
-          <input required value={booking.name} onChange={e => setBooking(v => ({ ...v, name: e.target.value }))} maxLength={120} placeholder="Your name" className="w-full rounded-xl border border-line bg-bg px-3 py-2.5 text-sm text-ink" />
-          <input required type="email" value={booking.email} onChange={e => setBooking(v => ({ ...v, email: e.target.value }))} maxLength={254} placeholder="Email address" className="w-full rounded-xl border border-line bg-bg px-3 py-2.5 text-sm text-ink" />
-          <input value={booking.company} onChange={e => setBooking(v => ({ ...v, company: e.target.value }))} maxLength={160} placeholder="Company (optional)" className="w-full rounded-xl border border-line bg-bg px-3 py-2.5 text-sm text-ink" />
-          <input required value={booking.topic} onChange={e => setBooking(v => ({ ...v, topic: e.target.value }))} maxLength={500} placeholder="What would you like to discuss?" className="w-full rounded-xl border border-line bg-bg px-3 py-2.5 text-sm text-ink" />
-          <label className="block text-xs text-ink-muted">Appointment date (UK time)<input required type="date" value={bookingDate} min={todayInLondon()} onChange={e => loadSlots(e.target.value)} className="mt-1 w-full rounded-xl border border-line bg-bg px-3 py-2.5 text-sm text-ink" /></label>
-          {slotsBusy && <p className="flex items-center gap-2 text-xs text-ink-muted"><LoaderCircle className="h-4 w-4 animate-spin" />Checking calendar…</p>}
-          {slots.length > 0 && <label className="block text-xs text-ink-muted">Available times
-            <select required value={selectedSlot} onChange={e => setSelectedSlot(e.target.value)} className="mt-1 w-full rounded-xl border border-line bg-bg px-3 py-2.5 text-sm text-ink"><option value="">Choose a time</option>{slots.map(slot => <option key={slot.start} value={slot.start}>{slot.label}</option>)}</select>
-          </label>}
-          {formStatus && <p role="status" className="text-xs text-ink-muted">{formStatus}</p>}
-          <button disabled={formBusy || slotsBusy || !selectedSlot} className="flex w-full items-center justify-center gap-2 rounded-full bg-burgundy px-4 py-3 text-sm text-white disabled:opacity-50">{formBusy ? <LoaderCircle className="h-4 w-4 animate-spin" /> : <CheckCircle2 className="h-4 w-4" />}{formBusy ? 'Booking…' : 'Confirm appointment'}</button>
-        </form>}
+        </form> : <div className="flex-1 overflow-y-auto p-4">
+          <p className="mb-4 text-sm text-ink-muted">Choose a time that works for you using our Cal.com booking page. Select an available slot there to receive your booking confirmation.</p>
+          <a href="https://cal.com/company-flow-1ort2e/15min" target="_blank" rel="noopener noreferrer" className="flex w-full items-center justify-center gap-2 rounded-full bg-burgundy px-4 py-3 text-sm text-white hover:bg-burgundy-light transition-colors">
+            <CalendarDays className="h-4 w-4" /> Choose a time on Cal.com
+          </a>
+        </div>}
         <p className="px-4 pb-3 text-[10px] text-ink-dim">Avoid sharing sensitive information. Enquiries go to companyflow0@gmail.com.</p>
       </section>}
       <div className="flex items-center gap-3">

@@ -1,16 +1,16 @@
 import { Reveal, SplitHeading, SectionLabel, TextWriteReveal } from '@/components/Reveal';
 import { PageHero } from '@/components/PageHero';
 import { MagneticButton } from '@/components/MagneticButton';
-import { teamMembers, officeGallery, values, timeline } from '@/data/team';
+import { teamMembers, officeGallery, values, deliveryStages } from '@/data/team';
 import { ArrowRight } from 'lucide-react';
 
 export function CompanyPage() {
   return (
     <div className="grain">
       <PageHero
-        label="Company"
-        title="A senior team,"
-        italicWord="built for the long run."
+        label="About CompanyFlow"
+        title="A product-minded partner,"
+        italicWord="from idea to launch."
         subtitle="We are an independent software studio combining product thinking, thoughtful design and practical engineering. You work directly with the people building your product, from discovery through launch and support."
       />
 
@@ -23,12 +23,12 @@ export function CompanyPage() {
         </div>
       </section>
 
-      {/* Timeline */}
+      {/* Delivery approach */}
       <section className="px-[5vw] py-20 border-t border-line">
-        <SectionLabel className="mb-6">Our story</SectionLabel>
-        <SplitHeading text="From a laptop to a studio." className="text-[clamp(2rem,5vw,4.5rem)] font-bold tracking-tight mb-16" />
+        <SectionLabel className="mb-6">How we work</SectionLabel>
+        <SplitHeading text="From first question to launch." className="text-[clamp(2rem,5vw,4.5rem)] font-bold tracking-tight mb-16" />
         <div className="flex flex-col gap-0">
-          {timeline.map((t, i) => (
+          {deliveryStages.map((t, i) => (
             <Reveal key={i} delay={i * 50}>
               <div className="grid grid-cols-[80px_1fr] md:grid-cols-[120px_1fr_2fr] gap-4 py-8 border-t border-line">
                 <span className="font-mono text-sm text-burgundy-light">{t.year}</span>
@@ -76,15 +76,15 @@ export function CompanyPage() {
         </div>
       </section>
 
-      {/* Office gallery */}
+      {/* Collaborative working style */}
       <section className="px-[5vw] py-20 border-t border-line">
-        <SectionLabel className="mb-6">Culture</SectionLabel>
-        <SplitHeading text="Where we work." className="text-[clamp(2rem,5vw,4.5rem)] font-bold tracking-tight mb-12" />
+        <SectionLabel className="mb-6">How we collaborate</SectionLabel>
+        <SplitHeading text="A thoughtful working rhythm." className="text-[clamp(2rem,5vw,4.5rem)] font-bold tracking-tight mb-12" />
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {officeGallery.map((img, i) => (
             <Reveal key={i} delay={i * 40}>
               <div className={`overflow-hidden rounded-2xl border border-line ${i === 0 ? 'col-span-2 md:col-span-2 row-span-2 aspect-[16/10]' : 'aspect-[4/3]'}`}>
-                <img src={img} alt="Office" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+                <img src={img} alt="Collaborative workspace" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
               </div>
             </Reveal>
           ))}

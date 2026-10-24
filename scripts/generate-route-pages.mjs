@@ -97,6 +97,15 @@ for (const routePath of new Set(paths)) {
     isPartOf: { '@type': 'WebSite', name: 'CompanyFlow', url: `${siteUrl}/` },
     publisher: { '@type': 'Organization', name: 'CompanyFlow', url: `${siteUrl}/` }
   };
+  const [section, child, detail] = route.split('/').filter(Boolean);
+  if (section === 'solutions' && child) schema.mainEntity = {
+    '@type': 'Service', name: title.replace(' | CompanyFlow', ''), description,
+    provider: { '@type': 'Organization', name: 'CompanyFlow', url: `${siteUrl}/` }
+  };
+  if (section === 'resources' && child === 'blog' && detail) schema.mainEntity = {
+    '@type': 'Article', headline: title.replace(' | CompanyFlow Journal', ''), description,
+    mainEntityOfPage: canonical, publisher: { '@type': 'Organization', name: 'CompanyFlow', url: `${siteUrl}/` }
+  };
   html = html.replace('</head>', `  <script type="application/ld+json" data-companyflow-prerender="true">${JSON.stringify(schema)}</script>\n</head>`);
   const fallback = `<noscript><main><h1>${escapeHtml(title)}</h1><p>${escapeHtml(description)}</p><p>CompanyFlow builds practical digital products, custom software, business websites, e-commerce stores, ERP and CRM systems, and AI automation.</p><p><a href="/company/">About CompanyFlow</a> · <a href="/solutions/">Our services</a> · <a href="/case-studies/">Project examples</a> · <a href="/contact/">Contact us</a></p></main></noscript>`;
   html = html.replace('<div id="root"></div>', `${fallback}\n    <div id="root"></div>`);

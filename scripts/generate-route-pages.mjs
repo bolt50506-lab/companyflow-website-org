@@ -106,6 +106,18 @@ for (const routePath of new Set(paths)) {
     '@type': 'Article', headline: title.replace(' | CompanyFlow Journal', ''), description,
     mainEntityOfPage: canonical, publisher: { '@type': 'Organization', name: 'CompanyFlow', url: `${siteUrl}/` }
   };
+  if (section === 'case-studies' && child) schema.mainEntity = {
+    '@type': 'CreativeWork', name: title.replace(' | CompanyFlow Case Study', ''), description,
+    creator: { '@type': 'Organization', name: 'CompanyFlow', url: `${siteUrl}/` }
+  };
+  const crumbParts = route.split('/').filter(Boolean);
+  const breadcrumbItems = [{ '@type': 'ListItem', position: 1, name: 'Home', item: `${siteUrl}/` }];
+  let breadcrumbPath = '';
+  crumbParts.forEach((part, index) => {
+    breadcrumbPath += `/${part}`;
+    breadcrumbItems.push({ '@type': 'ListItem', position: index + 2, name: humanize(part), item: `${siteUrl}${breadcrumbPath}/` });
+  });
+  schema.breadcrumb = { '@type': 'BreadcrumbList', itemListElement: breadcrumbItems };
   html = html.replace('</head>', `  <script type="application/ld+json" data-companyflow-prerender="true">${JSON.stringify(schema)}</script>\n</head>`);
   const fallback = `<noscript><main><h1>${escapeHtml(title)}</h1><p>${escapeHtml(description)}</p><p>CompanyFlow builds practical digital products, custom software, business websites, e-commerce stores, ERP and CRM systems, and AI automation.</p><p><a href="/company/">About CompanyFlow</a> · <a href="/solutions/">Our services</a> · <a href="/case-studies/">Project examples</a> · <a href="/contact/">Contact us</a></p></main></noscript>`;
   html = html.replace('<div id="root"></div>', `${fallback}\n    <div id="root"></div>`);

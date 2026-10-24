@@ -48,10 +48,10 @@ export const testimonials = [
 ];
 
 export const stats = [
-  { value: '12', label: 'Years active' },
-  { value: '180+', label: 'Projects shipped' },
-  { value: '40+', label: 'Clients served' },
-  { value: '98%', label: 'Client retention' },
+  { value: '12', label: 'Service disciplines' },
+  { value: '5', label: 'Delivery stages' },
+  { value: '3', label: 'Core business systems' },
+  { value: '1', label: 'Connected delivery team' },
 ];
 
 export const processSteps = [

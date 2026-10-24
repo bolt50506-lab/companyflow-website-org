@@ -9,59 +9,56 @@ const DEFAULT_DESCRIPTION = 'CompanyFlow designs and develops custom software, b
 type SeoDetails = { title: string; description: string };
 
 function getSeoDetails(route: string): SeoDetails {
-  const parts = route.split('/').filter(Boolean);
-  const [section, child, detail] = parts;
-
-  if (!section) return { title: DEFAULT_TITLE, description: DEFAULT_DESCRIPTION };
-  if (section === 'company') return {
-    title: 'About CompanyFlow | How We Build Better Software',
-    description: 'Meet CompanyFlow, learn about our approach, team, values, and how we turn business needs into useful digital products.',
+  const [section, child, detail] = route.split('/').filter(Boolean);
+  const services: Record<string, [string, string]> = {
+    'web-development': ['Web Development Services', 'CompanyFlow builds fast, accessible business websites and web applications tailored to customers, workflows and growth goals.'],
+    'mobile-app-development': ['Mobile App Development', 'Plan and build iOS and Android apps with thoughtful UX, reliable integrations and maintainable cross-platform technology.'],
+    'ui-ux-design': ['UI/UX Design Services', 'Improve product usability with research, prototypes, interface design, accessible components and practical design systems.'],
+    'cloud-devops': ['Cloud & DevOps Services', 'Improve delivery reliability with cloud architecture, CI/CD pipelines, infrastructure automation, monitoring and migration support.'],
+    'ai-automation': ['AI & Workflow Automation', 'Automate repetitive workflows with carefully scoped AI, integrations, validation rules and human review.'],
+    'growth-engineering': ['Growth Engineering Services', 'Improve digital conversion journeys with analytics, experimentation, funnel reviews and marketing workflow automation.'],
+    'custom-software': ['Custom Software Development', 'Build custom business software, internal tools, portals, workflow applications and integrations around how your team works.'],
+    'erp-systems': ['ERP Development & Integration', 'Connect inventory, orders, purchasing, finance and operations with ERP implementation, customisation and integrations.'],
+    'crm-solutions': ['CRM Development & Customisation', 'Organise leads, customer relationships and sales workflows with CRM implementation, tailored features and integrations.'],
+    'ecommerce-shopify': ['E-commerce & Shopify Development', 'Build and improve online stores with Shopify development, storefront UX, integrations and performance-focused improvements.'],
+    'saas-product-development': ['SaaS Product Development', 'Turn a product idea into a maintainable SaaS platform with product planning, UX, application development and scalable foundations.'],
+    'data-analytics': ['Data Analytics & Business Intelligence', 'Turn operational data into useful decisions with reporting, dashboards, data integration and business intelligence solutions.']
   };
-  if (section === 'contact') return {
-    title: 'Contact CompanyFlow | Discuss Your Software Project',
-    description: 'Tell CompanyFlow about your software, website, e-commerce, ERP, CRM, or automation project and discuss the next steps.',
+  const blogs: Record<string, [string, string]> = {
+    'shipping-daily-without-breaking-things': ['Shipping Daily Without Breaking Things', 'Improve release confidence with automated tests, staged deployments, monitoring and rollback planning.'],
+    'design-systems-that-actually-get-used': ['Design Systems That Teams Actually Use', 'Explore how clear ownership, reusable components, accessible patterns and documentation improve design-system adoption.'],
+    'ai-claims-automation-without-the-hype': ['AI Claims Automation Without the Hype', 'A practical overview of document extraction, validation rules, human review and evaluation for AI-assisted claims workflows.'],
+    'headless-commerce-why-we-stopped-using-shopify': ['Headless Commerce: Choosing the Right Architecture', 'Understand trade-offs between hosted commerce platforms and headless architectures before choosing a store technology.'],
+    'the-real-cost-of-technical-debt': ['The Real Cost of Technical Debt', 'Understand how technical debt affects delivery, reliability and maintenance, and how to prioritise improvements.'],
+    'accessibility-as-a-feature-not-a-bug-fix': ['Accessibility as a Feature, Not a Bug Fix', 'Learn how accessible interaction patterns, semantic markup and keyboard support improve digital products.']
   };
-  if (section === 'case-studies') {
-    const study = caseStudies.find(item => item.slug === child);
-    if (study) return {
-      title: `${study.project} | CompanyFlow Project`,
-      description: `${study.description} Explore the ${study.category.toLowerCase()} project overview and technologies used.`,
-    };
-    return {
-      title: 'Case Studies | CompanyFlow Digital Projects',
-      description: 'Explore CompanyFlow project examples across business software, e-commerce, healthcare, SaaS, and digital product development.',
-    };
-  }
-  if (section === 'solutions') {
-    const solution = solutions.find(item => item.slug === child);
-    if (solution) return {
-      title: `${solution.title} Services | CompanyFlow`,
-      description: solution.description,
-    };
-    return {
-      title: 'Software Development Services | CompanyFlow',
-      description: 'Explore CompanyFlow services including custom software, web development, mobile apps, ERP, CRM, e-commerce, cloud, and AI automation.',
-    };
-  }
-  if (section === 'resources') {
-    if (child === 'blog' && detail) {
-      const post = blogPosts.find(item => item.slug === detail);
-      if (post) return { title: `${post.title} | CompanyFlow Journal`, description: post.excerpt };
-    }
-    if (child === 'blog') return {
-      title: 'Software Engineering & Product Design Blog | CompanyFlow',
-      description: 'Practical articles on software engineering, product design, AI automation, e-commerce, and building digital products.',
-    };
-    if (child === 'careers') {
-      const career = careers.find(item => item.slug === detail);
-      if (career) return { title: `${career.title} Careers | CompanyFlow`, description: career.description };
-      return { title: 'Careers at CompanyFlow | Opportunities', description: 'Explore career opportunities and ways to collaborate with CompanyFlow.' };
-    }
-    return { title: 'Resources | CompanyFlow', description: 'Read CompanyFlow insights on engineering, design, AI, and digital product development, or explore career opportunities.' };
-  }
-  return { title: DEFAULT_TITLE, description: DEFAULT_DESCRIPTION };
+  const caseTitles: Record<string, string> = {
+    'secure-access': 'Secure Access Biometric Sign-In App', 'floraison': 'Floraison Floral E-commerce Store',
+    'meridianrx': 'MeridianRx Online Pharmacy Storefront', 'aldera': 'Aldera Real Estate Platform',
+    'noor-adorn': 'Noor Adorn E-commerce Store', 'nexora-erp': 'Nexora ERP System',
+    'labstack': 'LabStacks Diagnostic Lab Management System', 'metro-mart': 'Metro Mart E-commerce Platform',
+    'corex-hr-dashboard': 'Corex HR Dashboard', 'vault-payments': 'Vault Payments Platform',
+    'medi-track': 'Medi-Track Healthcare Platform', 'bloom-commerce': 'Bloom Commerce Store',
+    'flowdesk-saas': 'Flowdesk SaaS Platform', 'cargo-sync': 'Cargo Sync Logistics Platform',
+    'keycard-access': 'Keycard Access Management', 'cloud-migrate-pinnacle': 'Pinnacle Cloud Migration',
+    'atlas-ai-assistant': 'Atlas AI Assistant', 'pulse-growth': 'Pulse Growth Platform',
+    'orbital-design-system': 'Orbital Design System', 'ridge-mobile-banking': 'Ridge Mobile Banking App',
+    'forge-internal-tools': 'Forge Internal Tools', 'summit-crm': 'Summit CRM Platform',
+    'harvest-erp': 'Harvest ERP System', 'helix-lims': 'Helix Laboratory Information Management System',
+    'luma-shopify': 'Luma Shopify Store', 'tidewater-bi': 'Tidewater Business Intelligence'
+  };
+  if (!section) return { title: 'CompanyFlow | Custom Software & Website Development', description: 'CompanyFlow builds custom software, business websites, e-commerce stores, ERP and CRM systems, and workflow automation for growing businesses.' };
+  if (section === 'company') return { title: 'About CompanyFlow | Our Software Development Approach', description: 'Learn about CompanyFlow and how we plan, design, build and support practical digital products for businesses.' };
+  if (section === 'contact') return { title: 'Contact CompanyFlow | Start a Software Project', description: 'Discuss a custom software, website, e-commerce, ERP, CRM or automation project with CompanyFlow and outline your goals.' };
+  if (section === 'solutions' && child && services[child]) return { title: services[child][0] + ' | CompanyFlow', description: services[child][1] };
+  if (section === 'solutions') return { title: 'Software Development Services | CompanyFlow', description: 'Explore custom software, web and mobile development, ERP, CRM, e-commerce, AI automation, cloud and data services from CompanyFlow.' };
+  if (section === 'case-studies' && child) { const name = caseTitles[child] || child.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '); return { title: name + ' | CompanyFlow Case Study', description: 'Explore the ' + name + ' project example, including goals, design approach, implementation choices and relevant technologies.' }; }
+  if (section === 'case-studies') return { title: 'Software & Digital Product Case Studies | CompanyFlow', description: 'Explore CompanyFlow project examples across business software, e-commerce, healthcare, SaaS and digital product development.' };
+  if (section === 'resources' && child === 'blog' && detail && blogs[detail]) return { title: blogs[detail][0] + ' | CompanyFlow Journal', description: blogs[detail][1] };
+  if (section === 'resources' && child === 'blog') return { title: 'Software Engineering & Product Design Blog | CompanyFlow', description: 'Read practical guidance on software engineering, product design, AI automation, e-commerce and digital product development.' };
+  if (section === 'resources' && child === 'careers') return { title: 'Careers at CompanyFlow | Work With Our Team', description: 'Explore opportunities and ways to collaborate with CompanyFlow across software development, product design and digital delivery.' };
+  return { title: 'CompanyFlow Resources | Engineering, Design & Careers', description: 'Explore CompanyFlow articles, software engineering insights, product design resources and career opportunities.' };
 }
-
 function normalizeDescription(value: string): string {
   const clean = value.replace(/\s+/g, ' ').trim();
   if (clean.length <= 160) return clean;

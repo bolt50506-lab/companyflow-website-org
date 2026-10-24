@@ -30,7 +30,7 @@ export function HomePage() {
           </span>
         </div>
         <h1 style={{ animationDelay: '120ms' }} className="hero-in text-[clamp(2.8rem,9vw,8.5rem)] font-bold leading-[0.92] tracking-tight max-w-5xl text-balance">
-          Software,{' '}
+          Custom software,{' '}
           <span className="font-display italic text-burgundy-light">engineered</span>{' '}
           with taste.
         </h1>

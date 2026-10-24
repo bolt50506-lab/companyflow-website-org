@@ -26,7 +26,7 @@ function CaseStudiesGrid() {
 
   return (
     <div className="grain">
-      <PageHero label="Case Studies" title="Proof," italicWord="not promises." subtitle={`Over 180 projects shipped across fintech, healthtech, ERP, CRM, e-commerce, SaaS, logistics, hospitality, and more. Here are ${caseStudies.length} of them.`} />
+      <PageHero label="Case Studies" title="Selected projects," italicWord="built around real workflows." subtitle={`Explore ${caseStudies.length} project examples across business software, e-commerce, healthcare, SaaS, logistics and digital products.`} />
       
       {/* Filter bar */}
       <section className="px-[5vw] py-8 border-t border-line sticky top-16 z-30 bg-bg/90">
@@ -64,7 +64,7 @@ function CaseStudiesGrid() {
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-semibold tracking-tight mb-1">{study.project}</h3>
-                  <p className="text-sm text-ink-muted mb-3">{study.client}</p>
+                  <p className="text-sm text-ink-muted mb-3">{study.industry}</p>
                   <p className="text-sm text-ink-muted leading-relaxed">{study.description}</p>
                   <div className="flex flex-wrap gap-1.5 mt-4">
                     {study.tech.slice(0, 4).map(t => (
@@ -96,20 +96,6 @@ function CaseStudyDetail({ study }: { study: CaseStudy }) {
       <section className="px-[5vw]">
         <div className="rounded-3xl overflow-hidden border border-line max-h-[60vh]">
           <img src={study.image} alt={study.project} className="w-full h-full object-cover" />
-        </div>
-      </section>
-
-      {/* Results */}
-      <section className="px-[5vw] py-16">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-line border border-line rounded-3xl overflow-hidden">
-          {study.results.map((r, i) => (
-            <Reveal key={r.label} delay={i * 50}>
-              <div className="bg-bg p-6 text-center">
-                <div className="text-[clamp(1.8rem,4vw,3rem)] font-bold tracking-tight text-burgundy-light">{r.value}</div>
-                <div className="font-mono text-xs uppercase tracking-widest text-ink-muted mt-2">{r.label}</div>
-              </div>
-            </Reveal>
-          ))}
         </div>
       </section>
 
@@ -154,23 +140,6 @@ function CaseStudyDetail({ study }: { study: CaseStudy }) {
           ))}
         </div>
       </section>
-
-      {/* Quote */}
-      {study.quote && (
-      <section className="px-[5vw] py-16 border-t border-line">
-        <div className="max-w-3xl">
-          <div className="text-6xl font-display italic text-burgundy-light/40 leading-none mb-4">"</div>
-          <blockquote className="text-[clamp(1.3rem,3vw,2rem)] leading-relaxed font-display italic">{study.quote.text}</blockquote>
-          <div className="mt-6 flex items-center gap-3">
-            <div className="w-12 h-12 rounded-full bg-burgundy/20 flex items-center justify-center font-bold text-burgundy-light">{study.quote.author[0]}</div>
-            <div>
-              <div className="font-semibold">{study.quote.author}</div>
-              <div className="text-sm text-ink-muted">{study.quote.role}</div>
-            </div>
-          </div>
-        </div>
-      </section>
-      )}
 
       {/* CTA */}
       <section className="py-32 px-[5vw] border-t border-line text-center">

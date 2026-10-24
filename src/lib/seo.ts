@@ -62,6 +62,14 @@ function getSeoDetails(route: string): SeoDetails {
   return { title: DEFAULT_TITLE, description: DEFAULT_DESCRIPTION };
 }
 
+function normalizeDescription(value: string): string {
+  const clean = value.replace(/\s+/g, ' ').trim();
+  if (clean.length <= 160) return clean;
+  const candidate = clean.slice(0, 157);
+  const boundary = candidate.lastIndexOf(' ');
+  return `${(boundary > 110 ? candidate.slice(0, boundary) : candidate).replace(/[,:;–—-]+$/, '').trim()}…`;
+}
+
 function setMeta(attribute: 'name' | 'property', key: string, value: string) {
   let element = document.head.querySelector<HTMLMetaElement>(`meta[${attribute}="${key}"]`);
   if (!element) {
@@ -73,7 +81,9 @@ function setMeta(attribute: 'name' | 'property', key: string, value: string) {
 }
 
 export function updateSeo(route: string) {
-  const { title, description } = getSeoDetails(route);
+  const details = getSeoDetails(route);
+  const title = details.title;
+  const description = normalizeDescription(details.description);
   document.title = title;
   setMeta('name', 'description', description);
   setMeta('name', 'robots', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');

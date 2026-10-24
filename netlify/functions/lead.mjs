@@ -26,7 +26,22 @@ export default async (request) => {
   try {
     const response = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: form, signal: AbortSignal.timeout(15000) });
     const result = await response.json().catch(() => ({}));
-    if (!response.ok || result.success !== true) return Response.json({ error: 'We could not send your enquiry right now. Please email companyflow0@gmail.com directly.' }, { status: 502 });
+    if (!response.ok || result.success !== true) {
+      const providerMessage = clean(result.message, 240);
+      // Log provider diagnostics only; never log access keys or submitted enquiry fields.
+      console.error('[lead] Web3Forms rejected submission', {
+        status: response.status,
+        success: result.success === true,
+        message: providerMessage || '(no provider message)',
+      });
+      return Response.json({ error: 'We could not send your enquiry right now. Please email companyflow0@gmail.com directly.' }, { status: 502 });
+    }
     return Response.json({ success: true, message: 'Thanks — your enquiry has been sent to the CompanyFlow team.' }, { headers: { 'Cache-Control': 'no-store' } });
-  } catch { return Response.json({ error: 'Email service unavailable. Please email companyflow0@gmail.com directly.' }, { status: 502 }); }
+  } catch (error) {
+    console.error('[lead] Web3Forms request failed', {
+      name: clean(error?.name, 80) || 'Error',
+      message: clean(error?.message, 240) || '(no error message)',
+    });
+    return Response.json({ error: 'Email service unavailable. Please email companyflow0@gmail.com directly.' }, { status: 502 });
+  }
 };

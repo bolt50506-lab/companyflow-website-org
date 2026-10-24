@@ -1,5 +1,5 @@
 export const teamMembers = [
-  { name: 'Dana Whitfield', role: 'Founder & CEO', image: 'https://images.pexels.com/photos/31880922/pexels-photo-31880922.jpeg?auto=compress&cs=tinysrgb&h=400&w=400' },
+  { name: 'Ali Ahmed', role: 'Founder & Software Lead', image: 'https://images.pexels.com/photos/31880922/pexels-photo-31880922.jpeg?auto=compress&cs=tinysrgb&h=400&w=400' },
   { name: 'Marcus Lindqvist', role: 'CTO & Lead Engineer', image: 'https://images.pexels.com/photos/39974545/pexels-photo-39974545.jpeg?auto=compress&cs=tinysrgb&h=400&w=400' },
   { name: 'Priya Raman', role: 'Head of Growth', image: 'https://images.pexels.com/photos/30198184/pexels-photo-30198184.jpeg?auto=compress&cs=tinysrgb&h=400&w=400' },
   { name: 'Yuki Tanaka', role: 'Design Director', image: 'https://images.pexels.com/photos/8250204/pexels-photo-8250204.jpeg?auto=compress&cs=tinysrgb&h=400&w=400' },
@@ -18,33 +18,9 @@ export const officeGallery = [
   'https://images.pexels.com/photos/39205127/pexels-photo-39205127.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
 ];
 
-export const clientLogos = [
-  'Vault Financial', 'Northwell Care', 'Bloom & Co', 'Flowdesk',
-  'Meridian Logistics', 'Aurelia Hotels', 'Atlas Insurance', 'Pulse Nutrition',
-  'Orbital SaaS', 'Ridge Credit Union', 'Forge Manufacturing', 'Pinnacle Retail',
-];
-
-export const testimonials = [
-  {
-    quote: 'CompanyFlow shipped a platform that processes more volume in an hour than our old system handled in a day.',
-    author: 'Dana Whitfield',
-    role: 'CTO, Vault Financial',
-  },
-  {
-    quote: 'For the first time, our nurses can see every patient\'s status on one screen. The platform paid for itself in three months.',
-    author: 'Dr. Samuel Okafor',
-    role: 'Medical Director, Northwell Care',
-  },
-  {
-    quote: 'Our marketing team ships campaigns the same day they think of them. The store has never gone down during a sale.',
-    author: 'Priya Raman',
-    role: 'Head of Growth, Bloom & Co',
-  },
-  {
-    quote: 'We went from Figma to a public beta with paying customers in five months. They felt like our own team, not a vendor.',
-    author: 'Marcus Lindqvist',
-    role: 'Co-founder, Flowdesk',
-  },
+export const technologyNames = [
+  'Shopify', 'React', 'Next.js', 'TypeScript', 'Supabase', 'PostgreSQL',
+  'Stripe', 'OpenAI', 'Vercel', 'Netlify', 'AWS', 'Google Cloud',
 ];
 
 export const stats = [
@@ -63,17 +39,16 @@ export const processSteps = [
 ];
 
 export const values = [
-  { title: 'Senior hands only', desc: 'Every project is built by experienced engineers. No juniors learning on your dime, no offshore hand-offs, no account managers relaying messages.' },
+  { title: 'Direct collaboration', desc: 'You work with the people responsible for the work. We keep communication clear and avoid unnecessary hand-offs.' },
   { title: 'Built to be handed over', desc: 'Clean code, documentation, and a CMS your team can use. We build products you can run without us. We measure success by how little you need us afterward.' },
   { title: 'Plain-spoken', desc: 'Clear scopes, honest timelines, and weekly demos. We explain technical tradeoffs in language your whole team understands. No jargon, no surprises.' },
   { title: 'Outcomes over output', desc: 'We measure success by your metrics, such as conversion rate, processing time, and retention, rather than lines of code or story points. If it does not move your numbers, we question it.' },
 ];
 
-export const timeline = [
-  { year: '2014', title: 'Founded in a co-working space', desc: 'Dana Whitfield and Marcus Lindqvist start CompanyFlow with one client and a laptop.' },
-  { year: '2016', title: 'First million in revenue', desc: 'Word of mouth grows the studio to a team of six. We ship our first fintech platform.' },
-  { year: '2019', title: 'Design practice launches', desc: 'Yuki Tanaka joins as Design Director. We start offering full-cycle product design alongside engineering.' },
-  { year: '2021', title: 'AI & Automation division', desc: 'We build our first LLM-powered production system for a healthcare client. The AI practice is born.' },
-  { year: '2023', title: '40 team members, 180 projects', desc: 'We hit 180 shipped projects with a 98% client retention rate. Remote-first across 12 countries.' },
-  { year: '2026', title: 'Where we are now', desc: 'A senior-only studio of 40 people. We take on 12 projects a year and turn down the rest. Quality over volume, always.' },
+export const deliveryStages = [
+  { year: '01', title: 'Discovery', desc: 'Clarify the business problem, users, constraints and what success should look like before choosing a solution.' },
+  { year: '02', title: 'Design', desc: 'Map the user journey, test the key flows and agree on the interface and product direction.' },
+  { year: '03', title: 'Build', desc: 'Develop in focused increments, review working software and refine priorities as the product takes shape.' },
+  { year: '04', title: 'Launch', desc: 'Prepare deployment, handover, documentation and the operational checks needed for a confident release.' },
+  { year: '05', title: 'Improve', desc: 'Use feedback and observed product needs to prioritise maintenance, performance and future improvements.' },
 ];

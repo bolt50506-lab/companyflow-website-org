@@ -123,6 +123,20 @@ export function updateSeo(route: string) {
     isPartOf: { '@type': 'WebSite', name: 'CompanyFlow', url: `${SITE_URL}/` },
     publisher: { '@type': 'Organization', name: 'CompanyFlow', url: `${SITE_URL}/` },
   };
+  const breadcrumbItems: { '@type': string; position: number; name: string; item: string }[] = [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+  ];
+  let breadcrumbPath = '';
+  parts.forEach((part, index) => {
+    breadcrumbPath += `/${encodeURIComponent(part)}`;
+    const solutionItem = section === 'solutions' && index === 1 ? solutions.find(item => item.slug === part) : undefined;
+    const blogItem = section === 'resources' && child === 'blog' && index === 2 ? blogPosts.find(item => item.slug === part) : undefined;
+    const caseItem = section === 'case-studies' && index === 1 ? caseStudies.find(item => item.slug === part) : undefined;
+    const label = solutionItem?.title ?? blogItem?.title ?? caseItem?.project ?? part.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+    breadcrumbItems.push({ '@type': 'ListItem', position: index + 2, name: label, item: `${SITE_URL}${breadcrumbPath}/` });
+  });
+  schema.breadcrumb = { '@type': 'BreadcrumbList', itemListElement: breadcrumbItems };
+
   const solution = section === 'solutions' ? solutions.find(item => item.slug === child) : undefined;
   const post = section === 'resources' && child === 'blog' && detail ? blogPosts.find(item => item.slug === detail) : undefined;
   const study = section === 'case-studies' && child ? caseStudies.find(item => item.slug === child) : undefined;

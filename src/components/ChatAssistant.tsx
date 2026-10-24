@@ -1,6 +1,8 @@
 import { FormEvent, useEffect, useRef, useState } from 'react';
 import { Bot, MessageCircle, Send, X, LoaderCircle, CalendarDays, ClipboardList, ArrowLeft } from 'lucide-react';
 
+const WEB3FORMS_ACCESS_KEY = '60cc8168-551e-4b8c-9b6b-b89d6f9c1e23';
+
 type Message = { role: 'user' | 'assistant'; content: string };
 type ChatMode = 'chat' | 'lead' | 'booking';
 const START: Message[] = [{ role: 'assistant', content: "Hi, I'm the CompanyFlow assistant. Ask me about our software, websites, ecommerce, ERP/CRM, or how to start a project." }];
@@ -59,9 +61,26 @@ export function ChatAssistant() {
     event.preventDefault();
     setFormBusy(true); setFormStatus('');
     try {
-      const response = await fetch('/.netlify/functions/lead', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(lead) });
-      const result = await response.json() as { success?: boolean; message?: string; error?: string };
-      if (!response.ok || !result.success) throw new Error(result.error || 'Could not send your enquiry.');
+      // Match the working Contact page's Web3Forms submission flow.
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: 'CompanyFlow AI assistant project enquiry',
+          from_name: 'CompanyFlow AI Assistant',
+          name: lead.name,
+          email: lead.email,
+          replyto: lead.email,
+          company: lead.company || 'Not provided',
+          budget: lead.budget || 'Not specified',
+          service: lead.service || 'Not specified',
+          message: lead.details,
+          botcheck: '',
+        }),
+      });
+      const result = await response.json() as { success?: boolean; message?: string };
+      if (!response.ok || result.success !== true) throw new Error(result.message || 'Could not send your enquiry.');
       setFormStatus(result.message || 'Your enquiry has been sent.');
       setMessages(current => [...current, { role: 'assistant', content: 'Thanks. Your project enquiry has been sent to the CompanyFlow team. They can reply to the email address you provided.' }]);
       setLead({ name: '', email: '', company: '', service: 'Custom Software Development', budget: '', details: '' });

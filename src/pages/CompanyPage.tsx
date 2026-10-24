@@ -11,7 +11,7 @@ export function CompanyPage() {
         label="Company"
         title="A senior team,"
         italicWord="built for the long run."
-        subtitle="We are an independent software studio of 40 senior engineers, designers, and strategists. No account managers or hand-offs. You work directly with the people building your product."
+        subtitle="We are an independent software studio combining product thinking, thoughtful design and practical engineering. You work directly with the people building your product, from discovery through launch and support."
       />
 
       {/* Mission */}

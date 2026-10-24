@@ -3,7 +3,7 @@ import { Reveal, SplitHeading, SectionLabel, CountUp, TextWriteReveal } from '@/
 import { MagneticButton } from '@/components/MagneticButton';
 import { Marquee } from '@/components/Marquee';
 import { SpotlightMarquee } from '@/components/SpotlightMarquee';
-import { stats, processSteps, testimonials } from '@/data/team';
+import { stats, processSteps } from '@/data/team';
 import { solutions } from '@/data/solutions';
 import { caseStudies } from '@/data/caseStudies';
 import { getIcon } from '@/lib/icons';
@@ -30,7 +30,7 @@ export function HomePage() {
           </span>
         </div>
         <h1 style={{ animationDelay: '120ms' }} className="hero-in text-[clamp(2.8rem,9vw,8.5rem)] font-bold leading-[0.92] tracking-tight max-w-5xl text-balance">
-          Software,{' '}
+          Custom software,{' '}
           <span className="font-display italic text-burgundy-light">engineered</span>{' '}
           with taste.
         </h1>
@@ -132,23 +132,22 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* Testimonials */}
+      {/* Engagement principles */}
       <section className="py-24 px-[5vw] border-t border-line">
-        <SectionLabel className="mb-6">Testimonials</SectionLabel>
-        <SplitHeading text="What clients say." className="text-[clamp(2rem,5.5vw,5rem)] font-bold tracking-tight mb-16" />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {testimonials.map((t, i) => (
-            <Reveal key={i} delay={i * 80}>
-              <blockquote className="border border-line rounded-3xl p-8 bg-bg-surface">
-                <p className="text-lg leading-relaxed mb-6">“{t.quote}”</p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-burgundy/20 flex items-center justify-center font-bold text-burgundy-light">{t.author[0]}</div>
-                  <div>
-                    <div className="font-medium text-sm">{t.author}</div>
-                    <div className="text-xs text-ink-muted">{t.role}</div>
-                  </div>
-                </div>
-              </blockquote>
+        <SectionLabel className="mb-6">Working together</SectionLabel>
+        <SplitHeading text="Clear work. Shared decisions." className="text-[clamp(2rem,5.5vw,5rem)] font-bold tracking-tight mb-16" />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {[
+            { title: 'A clear scope', desc: 'Agree on the problem, priorities, deliverables and constraints before implementation begins.' },
+            { title: 'Visible progress', desc: 'Review working increments, discuss trade-offs and keep decisions connected to your business goals.' },
+            { title: 'A considered handover', desc: 'Receive practical documentation and a clear path for operating, maintaining and extending the product.' },
+          ].map((item, i) => (
+            <Reveal key={item.title} delay={i * 70}>
+              <div className="h-full border border-line rounded-3xl p-8 bg-bg-surface">
+                <div className="font-mono text-xs text-burgundy-light mb-5">0{i + 1}</div>
+                <h3 className="text-2xl font-semibold tracking-tight mb-3">{item.title}</h3>
+                <p className="text-ink-muted leading-relaxed">{item.desc}</p>
+              </div>
             </Reveal>
           ))}
         </div>

@@ -41,6 +41,15 @@ export default {
         float: 'float 6s ease-in-out infinite',
         'drop-in': 'dropIn .28s cubic-bezier(0.16,1,0.3,1) both',
         'menu-in': 'menuIn .55s cubic-bezier(0.16,1,0.3,1) both',
+        'wps-float': 'wpsFloat 3.4s ease-in-out infinite',
+        'wps-pulse': 'wpsPulse 1.8s ease-in-out infinite',
+        'wps-needle': 'wpsNeedle 3.6s ease-in-out infinite alternate',
+        'wps-shuffle': 'wpsShuffle 4s ease-in-out infinite',
+        'wps-blink': 'wpsBlink 1s steps(2,end) infinite',
+        'wps-tick': 'wpsTick 2.2s steps(7,end) infinite',
+        'wps-draw': 'wpsDraw 4.6s ease-in-out infinite',
+        'wps-wobble': 'wpsWobble 2.4s ease-in-out infinite',
+        'wps-cursor': 'wpsCursor 4.8s ease-in-out infinite',
       },
       keyframes: {
         fadeUp: {

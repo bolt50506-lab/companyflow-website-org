@@ -1,5 +1,5 @@
 export const teamMembers = [
-  { name: 'Dana Whitfield', role: 'Founder & CEO', image: 'https://images.pexels.com/photos/31880922/pexels-photo-31880922.jpeg?auto=compress&cs=tinysrgb&h=400&w=400' },
+  { name: 'Ali Ahmed', role: 'Founder & Software Lead', image: '' },
   { name: 'Marcus Lindqvist', role: 'CTO & Lead Engineer', image: 'https://images.pexels.com/photos/39974545/pexels-photo-39974545.jpeg?auto=compress&cs=tinysrgb&h=400&w=400' },
   { name: 'Priya Raman', role: 'Head of Growth', image: 'https://images.pexels.com/photos/30198184/pexels-photo-30198184.jpeg?auto=compress&cs=tinysrgb&h=400&w=400' },
   { name: 'Yuki Tanaka', role: 'Design Director', image: 'https://images.pexels.com/photos/8250204/pexels-photo-8250204.jpeg?auto=compress&cs=tinysrgb&h=400&w=400' },

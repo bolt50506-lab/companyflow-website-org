@@ -913,3 +913,77 @@ html.light .premium-orb-wrap { opacity: .12; }
 .bs-activity {display:flex;align-items:center;gap:7px;padding:8px;border:1px solid rgba(255,255,255,.07);border-radius:6px;background:rgba(255,255,255,.025)}.bs-activity-dot {width:5px;height:5px;border-radius:50%;background:#81c99a}.bs-activity>span:nth-child(2) {display:flex;flex-direction:column;gap:3px;flex:1}.bs-activity b {font-size:7px}.bs-activity small {font-size:6px;color:#968b94}.bs-activity>svg {width:10px;height:10px;color:#8bc99a}
 .bs-card-number {font:600 9px ui-monospace,monospace;letter-spacing:.1em;color:#b67a89; }.bs-explore {display:inline-flex;align-items:center;gap:5px;margin-top:20px;font-size:12px;color:#e1a0ae}.bs-explore svg {width:13px;height:13px;transition:transform .3s}.bs-product-card:hover .bs-explore svg {transform:translate(2px,-2px)}
 @media(max-width:767px){.bs-product-visual{height:245px}.bs-section{padding-top:4rem;padding-bottom:4rem}}
+
+
+/* ───────── Cinematic stats + founder profile polish ───────── */
+.stats-cinematic {
+  background:
+    radial-gradient(ellipse at 14% 110%, rgba(105, 15, 31, .22), transparent 48%),
+    linear-gradient(180deg, rgba(12, 9, 10, .98), rgba(10, 10, 10, 1));
+}
+.stats-smoke {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+  width: 70%;
+  height: 155%;
+  top: -70%;
+  left: 12%;
+  opacity: .55;
+  filter: blur(26px);
+  transform: rotate(-18deg);
+  background:
+    radial-gradient(ellipse at 30% 55%, rgba(164, 42, 55, .34) 0 5%, transparent 34%),
+    radial-gradient(ellipse at 52% 42%, rgba(113, 22, 37, .42) 0 9%, transparent 42%),
+    radial-gradient(ellipse at 70% 54%, rgba(173, 48, 56, .22) 0 7%, transparent 38%);
+  animation: stats-smoke-drift 18s ease-in-out infinite alternate;
+}
+.stats-smoke-b {
+  width: 58%;
+  left: 38%;
+  top: -92%;
+  opacity: .38;
+  transform: rotate(12deg) scaleX(-1);
+  filter: blur(38px);
+  animation-delay: -8s;
+}
+.stats-metric {
+  min-height: 112px;
+  border-color: rgba(168, 56, 74, .48);
+}
+.founder-profile-image {
+  background:
+    radial-gradient(ellipse at 50% 25%, rgba(168, 56, 74, .25), transparent 55%),
+    linear-gradient(145deg, #251116, #0b0a0b 72%);
+  transition: border-color .45s ease, box-shadow .45s ease, transform .65s cubic-bezier(.2,.8,.2,1);
+}
+.group:hover .founder-profile-image {
+  border-color: rgba(168, 56, 74, .7);
+  box-shadow: 0 18px 50px -28px rgba(168, 56, 74, .55);
+  transform: translateY(-3px);
+}
+.founder-monogram {
+  background:
+    radial-gradient(ellipse at 50% 42%, rgba(168, 56, 74, .28), transparent 38%),
+    linear-gradient(135deg, rgba(35, 16, 21, .94), rgba(10, 10, 10, .98));
+}
+.founder-monogram span {
+  font-size: clamp(3.5rem, 7vw, 6rem);
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -.09em;
+  color: #f2ece9;
+  text-shadow: 0 8px 42px rgba(168, 56, 74, .28);
+}
+@keyframes stats-smoke-drift {
+  from { transform: translate3d(-2%, 0, 0) rotate(-18deg) scale(1); }
+  to { transform: translate3d(3%, 7%, 0) rotate(-13deg) scale(1.08); }
+}
+@media (max-width: 640px) {
+  .stats-cinematic { padding-top: 3.5rem; padding-bottom: 3.5rem; }
+  .stats-metric { min-height: 94px; padding-top: 1rem; }
+  .stats-smoke { width: 120%; left: -10%; opacity: .35; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stats-smoke { animation: none; }
+}

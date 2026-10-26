@@ -50,13 +50,15 @@ export function HomePage() {
       </section>
 
       {/* Stats */}
-      <section className="px-[5vw] py-20 border-t border-line">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+      <section className="stats-cinematic relative isolate overflow-hidden px-[5vw] py-20 md:py-24 border-t border-line">
+        <div className="stats-smoke stats-smoke-a" aria-hidden="true" />
+        <div className="stats-smoke stats-smoke-b" aria-hidden="true" />
+        <div className="relative z-10 grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10">
           {stats.map((s, i) => (
             <Reveal key={s.label} delay={i * 80}>
-              <div className="border-t border-burgundy-light/30 pt-4">
-                <div className="text-[clamp(2.5rem,5vw,4rem)] font-bold tracking-tight tabular-nums"><CountUp value={s.value} /></div>
-                <div className="font-mono text-xs uppercase tracking-widest text-ink-muted mt-2">{s.label}</div>
+              <div className="stats-metric border-t border-burgundy-light/40 pt-5 md:pt-6">
+                <div className="text-[clamp(2.5rem,5vw,4rem)] font-bold tracking-tight tabular-nums text-[#f5efed]"><CountUp value={s.value} /></div>
+                <div className="font-mono text-[10px] md:text-xs uppercase tracking-[0.16em] text-[#a9a0a0] mt-3">{s.label}</div>
               </div>
             </Reveal>
           ))}

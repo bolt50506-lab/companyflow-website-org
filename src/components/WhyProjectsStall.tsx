@@ -60,7 +60,7 @@ function AdoptionCard() {
 function SpeedIllustration() {
   return <AnimationFrame className="wps-speed">
     <div className="flex items-start justify-between gap-2">
-      <div><strong className="wps-speed-number text-3xl font-bold tracking-tight text-red-500">0.0s</strong><p className="text-[10px] text-gray-500">Page load time</p></div>
+      <div><strong className="wps-speed-number text-3xl font-bold tracking-tight text-red-500">6.4s</strong><p className="text-[10px] text-gray-500">Page load time</p></div>
       <span className="wps-leaving inline-flex items-center gap-1 rounded-full bg-red-100 px-2 py-1 text-[9px] font-semibold text-red-700">Visitors leaving <ArrowDownRight size={12} /></span>
     </div>
     <svg viewBox="0 0 240 96" className="mt-2 w-full" role="presentation">

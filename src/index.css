@@ -982,3 +982,79 @@ html.light .premium-orb-wrap { opacity: .12; }
   .stats-smoke { width: 120%; left: -10%; opacity: .35; }
 }
 @media (prefers-reduced-motion: reduce) { .stats-smoke { animation: none; } }
+
+
+/* ───────── Why Projects Stall bento section ───────── */
+.wps-facing-label > span:last-child { position: relative; font-family: 'Fraunces', Georgia, serif; font-size: .82rem; font-style: italic; text-transform: none; letter-spacing: .01em; }
+.wps-facing-label > span:first-child { width: 28px !important; }
+.wps-facing-label::after { content: ''; width: 28px; height: 8px; margin-left: -72px; margin-top: 25px; border-bottom: 1px solid rgb(var(--burg-l)); border-radius: 50%; transform: rotate(-7deg); }
+.wps-issue-card { transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease; }
+.wps-issue-card:hover, .wps-adoption:hover { transform: translateY(-3px); border-color: rgb(var(--burg-l) / .55); box-shadow: 0 18px 45px -35px rgb(var(--burg-l) / .45); }
+.wps-illustration { position: relative; min-height: 150px; overflow: hidden; border-radius: 15px; padding: 12px; background: #f8f7f6; color: #202024; isolation: isolate; }
+.wps-illustration * { animation-play-state: paused !important; }
+.wps-illustration.is-active * { animation-play-state: running !important; }
+.wps-adoption { transition: border-color .35s ease, box-shadow .35s ease, transform .35s ease; }
+.wps-adoption-glow { position: absolute; z-index: 0; width: 75%; height: 70%; right: -5%; bottom: 3%; border-radius: 50%; background: radial-gradient(ellipse, rgb(var(--burg-l) / .3), rgb(var(--burg-l) / .08) 40%, transparent 72%); filter: blur(22px); animation: wps-drift 12s ease-in-out infinite alternate; }
+.wps-woman { z-index: 2; }
+.wps-signups { animation: wps-float 3.4s ease-in-out infinite; }
+.wps-zero { animation: wps-pulse 1.8s ease-in-out infinite; }
+.wps-status-dot { animation: wps-pulse 1.3s ease-in-out infinite; }
+.wps-speed-number { animation: wps-number-pulse 2.4s ease-in-out infinite; }
+.wps-leaving { animation: wps-chip 2s ease-in-out infinite; }
+.wps-gauge-needle { transform-origin: 120px 82px; animation: wps-needle 3.6s ease-in-out infinite alternate; }
+.wps-report-row { animation: wps-shuffle 4s ease-in-out infinite; }
+.wps-flag-row { animation: wps-flag 1.8s ease-in-out infinite; }
+.wps-rank { animation: wps-bounce 1.6s ease-in-out infinite; }
+.wps-caret { animation: wps-blink 1s steps(2,end) infinite; }
+.wps-retro-stripes { background: repeating-linear-gradient(135deg, #eee 0 7px, #e4e4e4 7px 14px); }
+.wps-retro-text { animation: wps-flicker 2.6s ease-in-out infinite; }
+.wps-counter { display: inline-block; animation: wps-tick 2.2s steps(7,end) infinite; }
+.wps-trust { animation: wps-trust 3.8s ease-in-out infinite; }
+.wps-ux-path { animation: wps-draw 4.6s ease-in-out infinite; }
+.wps-question-node { opacity: 0; animation: wps-pop 4.6s ease-in-out infinite; }
+.wps-question-node:nth-of-type(2) { animation-delay: .8s; }
+.wps-question-node:nth-of-type(3) { animation-delay: 1.5s; }
+.wps-left-site { opacity: 0; animation: wps-left 4.6s ease-in-out infinite; }
+.wps-question-bubble { animation: wps-wobble 2.4s ease-in-out infinite; transform-origin: bottom right; }
+.wps-cta-option:nth-child(1) { animation: wps-option 4.8s ease-in-out infinite; }
+.wps-cta-option:nth-child(2) { animation: wps-option 4.8s ease-in-out .9s infinite; }
+.wps-cta-option:nth-child(3) { animation: wps-option 4.8s ease-in-out 1.8s infinite; }
+.wps-mouse-pointer { animation: wps-cursor 4.8s ease-in-out infinite; }
+.wps-audit-card { background: radial-gradient(ellipse at 95% 0%, rgba(124,31,46,.45), transparent 42%), linear-gradient(135deg, #171318, #09090b 75%); }
+.wps-audit-glow { position: absolute; top: -30%; right: -10%; width: 65%; height: 80%; background: radial-gradient(ellipse, rgba(168,56,74,.22), transparent 68%); pointer-events: none; }
+.wps-audit-button { min-height: 48px; }
+.wps-audit-button .mb-fill { background: #7c1f2e; }
+.wps-audit-button:hover { color: #fff7f4; }
+.wps-audit-arrow { transition: transform .3s ease; }
+.wps-audit-button:hover .wps-audit-arrow { transform: translate(2px,-2px); }
+@keyframes wps-drift { from { transform: translate3d(-3%, 2%, 0) scale(.95); } to { transform: translate3d(4%, -3%, 0) scale(1.08); } }
+@keyframes wps-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+@keyframes wps-pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: .55; transform: scale(.88); } }
+@keyframes wps-number-pulse { 0%,100% { opacity: 1; } 50% { opacity: .72; } }
+@keyframes wps-chip { 0%,100% { transform: translate(0,0); } 50% { transform: translate(2px,-2px); } }
+@keyframes wps-needle { from { transform: rotate(-8deg); } to { transform: rotate(24deg); } }
+@keyframes wps-shuffle { 0%,100% { transform: translateX(0); } 50% { transform: translateX(3px); } }
+@keyframes wps-flag { 0%,100% { opacity: 1; } 50% { opacity: .6; } }
+@keyframes wps-bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+@keyframes wps-blink { 0%,49% { opacity: 1; } 50%,100% { opacity: 0; } }
+@keyframes wps-flicker { 0%,94%,100% { opacity: 1; } 96% { opacity: .65; } 98% { opacity: .9; } }
+@keyframes wps-tick { 0%,100% { opacity: 1; } 50% { opacity: .5; } }
+@keyframes wps-trust { 0%,15% { width: 22%; } 65%,85% { width: 7%; } 100% { width: 22%; } }
+@keyframes wps-draw { 0% { stroke-dashoffset: 340; } 35%,78% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: -340; } }
+@keyframes wps-pop { 0%,12%,100% { opacity: 0; transform: scale(.5); } 22%,72% { opacity: 1; transform: scale(1); } 82% { opacity: 0; transform: scale(.7); } }
+@keyframes wps-left { 0%,55% { opacity: 0; transform: translateX(10px); } 68%,86% { opacity: 1; transform: translateX(0); } 100% { opacity: 0; transform: translateX(6px); } }
+@keyframes wps-wobble { 0%,100% { transform: rotate(0); } 25% { transform: rotate(2deg); } 75% { transform: rotate(-2deg); } }
+@keyframes wps-option { 0%,12%,100% { border-color: #9ca3af; background: transparent; } 20%,32% { border-color: #b63d53; background: #fff0f3; } }
+@keyframes wps-cursor { 0%,10% { transform: translate(0,0); } 28%,38% { transform: translate(-70px,-6px); } 55%,65% { transform: translate(0,-6px); } 82%,92% { transform: translate(70px,-6px); } 100% { transform: translate(0,0); } }
+@media (prefers-reduced-motion: reduce) {
+  .wps-illustration *, .wps-signups, .wps-zero, .wps-status-dot, .wps-adoption-glow { animation: none !important; }
+  .wps-issue-card, .wps-adoption { transition: none !important; }
+  .wps-question-node { opacity: 1; }
+  .wps-ux-path { stroke-dashoffset: 0; }
+  .wps-left-site { opacity: 1; }
+}
+@media (max-width: 639px) {
+  .wps-adoption { min-height: 420px; }
+  .wps-woman { max-height: 72%; max-width: 78%; }
+  .wps-illustration { min-height: 145px; }
+}

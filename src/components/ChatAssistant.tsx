@@ -90,7 +90,7 @@ export function ChatAssistant() {
 
 
   return (
-    <div className="chat-widget fixed right-5 bottom-24 z-[85] flex flex-col items-end gap-3">
+    <div className="chat-widget fixed right-5 bottom-5 z-[85] flex flex-col items-end gap-3">
       {open && <section className="chat-panel flex h-[min(560px,70vh)] w-[min(370px,calc(100vw-2.5rem))] flex-col overflow-hidden rounded-3xl border border-line bg-bg-surface shadow-[0_24px_80px_rgba(0,0,0,.5)]" aria-label="CompanyFlow chat assistant">
         <header className="flex items-center gap-3 border-b border-line p-4">
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-burgundy/20 text-burgundy-light"><Bot className="h-5 w-5" /></div>

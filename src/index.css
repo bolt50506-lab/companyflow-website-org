@@ -493,7 +493,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 
   .chat-widget {
     right: max(.875rem, env(safe-area-inset-right));
-    bottom: calc(4.75rem + env(safe-area-inset-bottom));
+    bottom: calc(.875rem + env(safe-area-inset-bottom));
     gap: .5rem;
     z-index: 85;
   }
@@ -529,13 +529,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
     width: 3.25rem;
     height: 3.25rem;
     flex: 0 0 3.25rem;
-  }
-
-  .back-to-top {
-    right: max(.875rem, env(safe-area-inset-right));
-    bottom: calc(.875rem + env(safe-area-inset-bottom));
-    width: 2.875rem;
-    height: 2.875rem;
   }
 
   /* Make small controls comfortable to tap without enlarging the desktop UI. */

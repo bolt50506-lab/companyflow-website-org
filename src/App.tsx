@@ -7,7 +7,6 @@ import { Cursor } from '@/components/Cursor';
 import { FluidBackground } from '@/components/FluidBackground';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
-import { BackToTop } from '@/components/BackToTop';
 import { WhatsAppWidget } from '@/components/WhatsAppWidget';
 import { ChatAssistant } from '@/components/ChatAssistant';
 import { HomePage } from '@/pages/HomePage';
@@ -110,7 +109,6 @@ export default function App() {
         <Page />
       </main>
       <Footer />
-      <BackToTop />
       <WhatsAppWidget />
       <ChatAssistant />
     </ThemeProvider>

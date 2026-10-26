@@ -107,8 +107,8 @@ function HeroCard() {
           <img
             src="/stressed-woman-laptop.webp"
             alt="Worried woman holding a tablet that shows a page that can't be reached"
-            width={532}
-            height={716}
+            width={524}
+            height={712}
             loading="lazy"
             decoding="async"
             className="wps-woman pointer-events-none absolute bottom-0 right-0 z-[2] h-[76%] w-auto max-w-[80%] object-contain object-bottom sm:right-[6%] sm:h-[84%] lg:right-0"

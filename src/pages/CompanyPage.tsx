@@ -65,8 +65,14 @@ export function CompanyPage() {
           {teamMembers.map((m, i) => (
             <Reveal key={m.name} delay={i * 50}>
               <div className="group" data-cursor="View">
-                <div className="aspect-square rounded-2xl overflow-hidden bg-bg-surface2 border border-line mb-4">
-                  <img src={m.image} alt={m.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" />
+                <div className={`founder-profile-image relative aspect-square rounded-2xl overflow-hidden bg-bg-surface2 border border-line mb-4 ${i === 0 ? 'founder-profile-featured' : ''}`}>
+                  {m.image ? (
+                    <img src={m.image} alt={m.name} loading="lazy" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" />
+                  ) : (
+                    <div className="founder-monogram absolute inset-0 flex items-center justify-center" role="img" aria-label="Ali Ahmed initials">
+                      <span>AH</span>
+                    </div>
+                  )}
                 </div>
                 <h3 className="font-semibold tracking-tight">{m.name}</h3>
                 <p className="text-sm text-ink-muted">{m.role}</p>

@@ -9,6 +9,7 @@ import { caseStudies } from '@/data/caseStudies';
 import { getIcon } from '@/lib/icons';
 import { BusinessSoftware } from '@/components/BusinessSoftware';
 import { HeroImage } from '@/components/HeroImage';
+import { WhyProjectsStall } from '@/components/WhyProjectsStall';
 
 const featuredSlugs = ['floraison', 'vault-payments', 'meridianrx', 'summit-crm', 'aldera', 'harvest-erp', 'nexora-erp', 'noor-adorn', 'labstack', 'metro-mart'];
 const featuredProjects = featuredSlugs
@@ -116,6 +117,9 @@ export function HomePage() {
           })}
         </div>
       </section>
+
+      {/* Why projects stall */}
+      <WhyProjectsStall />
 
       {/* Process */}
       <section className="py-24 px-[5vw] border-t border-line">

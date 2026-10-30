@@ -1,0 +1,11 @@
+/*
+Theme Name: CompanyFlow Original
+Theme URI: https://www.companyflow.co.uk/
+Author: CompanyFlow
+Description: WordPress theme wrapper for the original CompanyFlow React website. The original front end, page content, project imagery, animations, and WhatsApp contact widget are bundled at build time.
+Version: 1.0.0
+Requires at least: 6.0
+Requires PHP: 7.4
+Text Domain: companyflow-original
+*/
+html,body{margin:0;min-height:100%;background:#0a0a0a}

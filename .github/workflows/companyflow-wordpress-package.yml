@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - wordpress-ready-package
+      - main
     paths:
       - "src/**"
       - "public/**"
@@ -47,7 +48,7 @@ jobs:
           rm -rf wordpress-theme/companyflow-site/app/*
           cp -R dist/. wordpress-theme/companyflow-site/app/
           test -s wordpress-theme/companyflow-site/app/index.html
-          test -s wordpress-theme/companyflow-site/app/assets
+          test -d wordpress-theme/companyflow-site/app/assets
           mkdir -p build
           cd wordpress-theme
           zip -qr ../build/companyflow-wordpress-theme.zip companyflow-site

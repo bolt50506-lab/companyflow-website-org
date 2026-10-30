@@ -1,0 +1,65 @@
+name: Build CompanyFlow WordPress theme
+
+on:
+  push:
+    branches:
+      - wordpress-ready-package
+    paths:
+      - "src/**"
+      - "public/**"
+      - "scripts/**"
+      - "package.json"
+      - "package-lock.json"
+      - "index.html"
+      - "wordpress-theme/**"
+      - ".github/workflows/companyflow-wordpress-package.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-wordpress-theme:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out CompanyFlow source
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build the original CompanyFlow site and route pages
+        run: npm run build
+
+      - name: Assemble the uploadable WordPress theme
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s dist/index.html
+          test -d dist/assets
+          mkdir -p wordpress-theme/companyflow-site/app
+          rm -rf wordpress-theme/companyflow-site/app/*
+          cp -R dist/. wordpress-theme/companyflow-site/app/
+          test -s wordpress-theme/companyflow-site/app/index.html
+          test -s wordpress-theme/companyflow-site/app/assets
+          mkdir -p build
+          cd wordpress-theme
+          zip -qr ../build/companyflow-wordpress-theme.zip companyflow-site
+          cd ..
+          unzip -l build/companyflow-wordpress-theme.zip | head -35
+          echo "Theme package size:"
+          du -h build/companyflow-wordpress-theme.zip
+
+      - name: Upload installable WordPress theme ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: companyflow-wordpress-theme
+          path: build/companyflow-wordpress-theme.zip
+          if-no-files-found: error
+          retention-days: 14
